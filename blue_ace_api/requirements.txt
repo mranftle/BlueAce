@@ -1,1 +1,4 @@
-#pip requirements here
+Django
+djangoresetframework
+djangoresetframework-jwt
+MySQL-python
