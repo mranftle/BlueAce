@@ -1,4 +1,6 @@
 Django
-djangoresetframework
-djangoresetframework-jwt
-MySQL-python
+djangorestframework
+djangorestframework-jwt
+markdown
+django-cors-headers
+django-filter
