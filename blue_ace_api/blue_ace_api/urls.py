@@ -17,9 +17,13 @@ from django.conf.urls import include, url
 from django.contrib import admin
 from quickstart.views import UserViewSet
 from rest_framework_jwt.views import obtain_jwt_token
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register(r'signup', UserViewSet, 'signup')
 
 urlpatterns = [
+    url(r'^', include(router.urls)),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^api-token-auth/', obtain_jwt_token),
-    url(r'signup/', UserViewSet)
+    url(r'^api-token-auth/', obtain_jwt_token)
 ]
