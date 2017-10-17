@@ -4,3 +4,4 @@ djangorestframework-jwt
 markdown
 django-cors-headers
 django-filter
+MySQL-python
