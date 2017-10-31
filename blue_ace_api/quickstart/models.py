@@ -12,11 +12,12 @@ class SportsGame(models.Model):
 
 class Bet(models.Model):
     id = models.AutoField(primary_key=True)
-    user1 = models.ForeignKey(User, on_delete=models.CASCADE)
-    user2 = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user1 = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user2 = models.ForeignKey(User, on_delete=models.CASCADE)
     user1=models.IntegerField()
     user2=models.IntegerField()
-    game = models.ForeignKey(SportsGame, on_delete=models.CASCADE)
+    game = models.IntegerField()
+    # game = models.ForeignKey(SportsGame, on_delete=models.CASCADE)
     started = models.TimeField()
 
 class Charity(models.Model):
