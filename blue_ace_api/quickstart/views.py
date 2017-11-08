@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from django.contrib.auth.models import User
 from models import Bet, Charity
-from quickstart.serializers import UserSerializer, BetSerializer, CharitySerializer
+from serializers import UserSerializer, BetSerializer, CharitySerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 
