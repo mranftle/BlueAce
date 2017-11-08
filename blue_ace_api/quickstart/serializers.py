@@ -20,8 +20,9 @@ class BetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Bet
-        # TODO update serializer
-        fields = ('user1', 'user2', 'game', 'started')
+        fields = ('home_user', 'away_user', 'home_bet', 'away_bet', 'game', 'home_team_abb',
+                  'away_team_abb', 'home_score', 'away_score', 'started', 'home_charity', 'away_charity',
+                  'completed', 'winner')
 
 class CharitySerializer(serializers.HyperlinkedModelSerializer):
 
