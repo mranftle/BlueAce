@@ -19,8 +19,10 @@ def send_mysportsfeed_request(url):
 def validate_win():
     print 'validate_win'
     # # Get all bets that started 5 hours ago
-    # bets = filter(lambda x: x.started + 18000 < time(), BetViewSet().get_queryset())
-    #
+    print 'before'
+    bets = filter(lambda x: x.started + 18000 < time() and x.completed is False, BetViewSet().get_queryset())
+    # b = BetViewSet()
+    # queryset = bets.get_object()
     # for bet in bets:
     #     # Construct url
     #     box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(bet.game,
