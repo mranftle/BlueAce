@@ -1,3 +1,4 @@
 .idea
 *.pyc
 blue_ace_api/quickstart/migrations/*
+*config.py
