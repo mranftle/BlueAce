@@ -20,9 +20,15 @@ def validate_win():
     print 'validate_win'
     # # Get all bets that started 5 hours ago
     print 'before'
-    bets = filter(lambda x: x.started + 18000 < time() and x.completed is False, BetViewSet().get_queryset())
+    print 'hi'
+    bets = filter(lambda x: x.started +18000 <time(), BetViewSet().get_queryset())
+    print bets
+
+    # bets = filter(lambda x: x.started + 18000 < time() and x.completed is False, BetViewSet().get_queryset())
     # b = BetViewSet()
     # queryset = bets.get_object()
+    # print 'b', b
+    # print 'q', queryset
     # for bet in bets:
     #     # Construct url
     #     box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(bet.game,
