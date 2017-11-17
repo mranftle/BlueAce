@@ -2,7 +2,7 @@ from time import time
 import base64
 import requests
 from config import credentials
-from quickstart.views import *
+from quickstart.views import BetViewSet
 
 def send_mysportsfeed_request(url):
     try:
@@ -17,27 +17,36 @@ def send_mysportsfeed_request(url):
 
 
 def validate_win():
-    # Get all bets that started 5 hours ago
-    bets = filter(lambda x: x.started + 18000 < time(), BetViewSet().get_queryset())
+    print 'validate_win'
+    # # Get all bets that started 5 hours ago
+    print 'before'
+    print 'hi'
+    bets = filter(lambda x: x.started +18000 <time(), BetViewSet().get_queryset())
+    print bets
 
-    for bet in bets:
-        # Construct url
-        box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(bet.game,
-            bet.away_team_abb, bet.home_team_abb)
-
-        # Make request
-        response = send_mysportsfeed_request(box_score_url)
-
-        # Parse scores
-        home_score = response.get('quarterTotals').get('homeScore')
-        away_score = response.get('quarterTotals').get('awayScore')
-
-        # Get winner and winning charity
-        winner, winning_charity = (bet.home_user, bet.home_charity) if home_score > away_score else (bet.away_user, bet.away_charity)
-
-        # Update DB
-        bet.winner = winner
-        winning_charity.total_donated += bet.home_bet if winner == bet.home_user else bet.away_bet
-        bet.home_score = home_score
-        bet.away_score = away_score
-        bet.completed = True
+    # bets = filter(lambda x: x.started + 18000 < time() and x.completed is False, BetViewSet().get_queryset())
+    # b = BetViewSet()
+    # queryset = bets.get_object()
+    # print 'b', b
+    # print 'q', queryset
+    # for bet in bets:
+    #     # Construct url
+    #     box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(bet.game,
+    #         bet.away_team_abb, bet.home_team_abb)
+    #
+    #     # Make request
+    #     response = send_mysportsfeed_request(box_score_url)
+    #
+    #     # Parse scores
+    #     home_score = response.get('quarterTotals').get('homeScore')
+    #     away_score = response.get('quarterTotals').get('awayScore')
+    #
+    #     # Get winner and winning charity
+    #     winner, winning_charity = (bet.home_user, bet.home_charity) if home_score > away_score else (bet.away_user, bet.away_charity)
+    #
+    #     # Update DB
+    #     bet.winner = winner
+    #     winning_charity.total_donated += bet.home_bet if winner == bet.home_user else bet.away_bet
+    #     bet.home_score = home_score
+    #     bet.away_score = away_score
+    #     bet.completed = True

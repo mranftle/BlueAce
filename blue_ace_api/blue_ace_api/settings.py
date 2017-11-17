@@ -27,7 +27,11 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+CRONJOBS = [
+    ('* * * * *', 'cron.validate_win', '>/tmp/cron_logs')
+]
 
+# CRONTAB_COMMAND_SUFFIX = '2>&1'
 # Application definition
 # REST_FRAMEWORK = {
 #     'DEFAULT_PERMISSION_CLASSES': (
@@ -48,6 +52,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'django_crontab',
     'corsheaders',
     'quickstart'
 )

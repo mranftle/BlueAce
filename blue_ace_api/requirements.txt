@@ -4,4 +4,5 @@ djangorestframework-jwt
 markdown
 django-cors-headers
 django-filter
+django-crontab
 MySQL-python
