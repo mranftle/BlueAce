@@ -12,4 +12,7 @@ import { Router } from "@angular/router";
 export class MainPageComponent {
 
   constructor(private router:Router){}
+  $scope.redirect = function () {
+    $location.url('/profile');
+  }
 }
