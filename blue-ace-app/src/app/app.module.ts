@@ -7,6 +7,7 @@ import {LoginComponent} from "./components/login.component";
 import {MainPageComponent} from "./components/mainpage.component";
 import {AuthService} from "./services/auth.service";
 import {HttpModule} from "@angular/http";
+import {AuthGuard} from "./guards/auth.guard";
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import {HttpModule} from "@angular/http";
     HttpModule
   ],
   providers: [
-    AuthService
+    AuthService,
+    AuthGuard
   ],
   bootstrap: [AppComponent]
 })
