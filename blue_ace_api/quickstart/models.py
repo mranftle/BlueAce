@@ -21,7 +21,7 @@ class Bet(models.Model):
     away_team_abb = models.CharField(max_length=20)
     home_score = models.IntegerField(null=True)
     away_score = models.IntegerField(null=True)
-    started = models.DateTime()
+    started = models.IntegerField()
     home_charity = models.IntegerField()
     away_charity = models.IntegerField()
     completed = models.BooleanField(default=False)
