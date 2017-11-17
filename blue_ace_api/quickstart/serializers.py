@@ -32,4 +32,4 @@ class CharitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Charity
-        fields = ('name', 'description', 'url')
+        fields = ('name', 'description', 'program_expenses', 'overall_rating', 'url', 'total_donated')
