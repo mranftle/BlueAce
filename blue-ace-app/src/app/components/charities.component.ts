@@ -9,4 +9,7 @@ import { Router } from "@angular/router";
 export class CharitiesComponent {
 
   constructor(private router: Router) {}
+  goHome(){
+    this.router.navigateByUrl('/main');
+  }
 }
