@@ -8,20 +8,30 @@ import {MainPageComponent} from "./components/mainpage.component";
 import {AuthService} from "./services/auth.service";
 import {HttpModule} from "@angular/http";
 
+import {CharitiesComponent} from './components/charities.component';
+import {FriendsComponent} from './components/friends.component';
+import {ProfileComponent} from './components/profile.component';
+import {SportsGamesComponent} from './components/sportsgames.component';
+import {AuthGuard} from "./guards/auth.guard";
+
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    MainPageComponent
+    MainPageComponent,
+    CharitiesComponent,
+    FriendsComponent,
+    ProfileComponent,
+    SportsGamesComponent,
+    LoginComponent
   ],
   imports: [
     routing,
     BrowserModule,
     HttpModule
+
   ],
-  providers: [
-    AuthService
-  ],
+  providers: [AuthService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

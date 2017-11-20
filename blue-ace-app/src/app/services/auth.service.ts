@@ -36,8 +36,13 @@ export class AuthService {
     let options = new RequestOptions({ headers: headers});
     return this.http.post(this.signUpUrl,body,options)
       .map((response: Response) => {
+
+          // login successful if there's a jwt token in the response
+          console.log('created');
+
         // login successful if there's a jwt token in the response
         console.log('created');
+
         }
       );
   }
