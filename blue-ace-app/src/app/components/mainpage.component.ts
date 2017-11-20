@@ -12,4 +12,17 @@ import { Router } from "@angular/router";
 export class MainPageComponent {
 
   constructor(private router:Router){}
+  gotoProfile(){
+    this.router.navigateByUrl('/main/profile');
+  }
+  gotoSports(){
+    this.router.navigateByUrl('/main/sportsgame');
+  }
+  gotoFriends(){
+    this.router.navigateByUrl('/main/friends');
+  }
+  gotoCharities(){
+    this.router.navigateByUrl('/main/charities');
+  }
+
 }
