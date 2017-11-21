@@ -38,6 +38,7 @@ export class FriendsComponent implements OnInit{
   addFriend(user_id: number, message:string) {
     console.log(user_id);
     this.friendService.addFriend(user_id, 'hi');
+    window.location.reload();
   }
 
   deleteFriend() {
@@ -47,6 +48,7 @@ export class FriendsComponent implements OnInit{
   // accept or decline a friend request
   acceptOrDeclineFriendRequest(request_id: number, acceptOrDecline:string){
     this.friendService.acceptDeclineFriendRequest(request_id, acceptOrDecline);
+    window.location.reload();
   }
 
 
@@ -71,12 +73,17 @@ export class FriendsComponent implements OnInit{
     this.friendService.getFriendRequests().then(
       (friendRequests) => {
         this.friendRequests = friendRequests.map(function(obj) {
-          var fr = new FriendRequest();
-          fr.id = obj.id;
-          fr.from_user =obj.from_user;
-          fr.to_user = obj.to_user;
-          fr.message = obj.message;
-          return fr
+          this.friendService.getUserName(obj.from_user).then(
+            (response) => {
+              var fr = new FriendRequest();
+              fr.id = obj.id;
+              fr.from_user =obj.from_user;
+              fr.to_user = obj.to_user;
+              fr.username = response['username'];
+              fr.message = obj.message;
+              return fr
+            }
+          )
         });
       }
     );

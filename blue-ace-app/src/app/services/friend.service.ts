@@ -6,6 +6,7 @@ import {Http, Headers, RequestOptions} from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/toPromise';
+import {Friend} from "../entities/friend";
 
 
 

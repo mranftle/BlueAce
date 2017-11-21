@@ -4,6 +4,7 @@
 
 export class FriendRequest {
   id: number;
+  username: string;
   from_user: number;
   to_user:number;
   message: string;

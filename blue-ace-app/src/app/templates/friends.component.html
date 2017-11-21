@@ -36,7 +36,7 @@
 </ul>
 <p>Friend Requests</p>
 <ul>
-  <li *ngFor="let fr of friendRequests; let i = index; trackBy: trackByFn">
+  <li *ngFor="let fr of friendRequests">
     {{fr.from_user}}
     {{fr.id}}
     <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
@@ -44,13 +44,13 @@
   </li>
 </ul><p>Sent Friend Requests</p>
 <ul>
-  <li *ngFor="let sfr of sentFriendRequests;let i = index; trackBy: trackByFn">
+  <li *ngFor="let sfr of sentFriendRequests">
     {{sfr.to_user}}
   </li>
 </ul>
 <p>Friends</p>
 <ul>
-  <li *ngFor="let f of friends;let i = index; trackBy: trackByFn">
+  <li *ngFor="let f of friends">
     {{f.username}}
   </li>
 </ul>
