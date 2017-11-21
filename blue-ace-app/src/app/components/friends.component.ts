@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import {FriendService} from "../services/friend.service";
 import {FriendRequest} from "../entities/friendRequest";
 import {Friend} from "../entities/friend";
+import {AuthService} from "../services/auth.service";
 @Component({
   selector: 'friends',
   templateUrl: '../templates/friends.component.html',
@@ -15,7 +16,7 @@ export class FriendsComponent implements OnInit{
   friendRequests: FriendRequest[];
   sentFriendRequests: FriendRequest[];
   constructor(private router: Router,
-              private friendService: FriendService){}
+              private friendService: FriendService, private authService: AuthService){}
   goHome(){
     this.router.navigateByUrl('/main');
   }
@@ -30,6 +31,10 @@ export class FriendsComponent implements OnInit{
   }
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
+  }
+  logout(){
+    this.authService.logout()
+    this.router.navigateByUrl('/login');
   }
   getAllUsers() {
     this.friendService.getAllUsers().then(

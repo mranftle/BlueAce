@@ -17,14 +17,38 @@
       <a class="navbar-brand" href="#">Navigate Pages</a>
     </div>
     <ul class="nav navbar-nav">
+      <li><button (click)="goHome()">Home</button></li>
       <li><button (click)="gotoSports()">Sports Games</button></li>
       <li><button (click)="gotoCharities()">Charities</button></li>
       <li><button (click)="gotoFriends()">Friends</button></li>
       <li><button (click)="gotoProfile()">Profile</button></li>
+      <li><button (click)="logout()">Logout</button></li>
     </ul>
   </div>
 </nav>
-
+<ngb-accordion [closeOthers]="true" activeIds="static-1">
+  <ngb-panel title="Pending Bets">
+    <ng-template ngbPanelContent>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Ongoing">
+    <ng-template ngbPanelContent>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2</ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2</ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2</ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Completed">
+    <ng-template ngbPanelContent>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team1 Won!<button>Email Opponent</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team2 Won!<button>Email Opponent</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAwayview  Charity 1 Charity2 Team2 Won!<button>Email Opponent</button></ul>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
