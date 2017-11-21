@@ -28,37 +28,57 @@
     </ul>
     </div>
   </div>
+
 </nav>
 <p>
-  All Users
+All Users
 </p>
 <ul>
   <li *ngFor="let user of allUsers">
-      {{user.username}}
-      {{user.id}}
+    {{user.username}}
+    {{user.id}}
     <button (click)="addFriend(user.id)">Add Friend</button>
   </li>
 </ul>
-<p>Friend Requests</p>
-<ul>
-  <li *ngFor="let fr of friendRequests">
-    {{fr.from_user}}
-    {{fr.id}}
-    <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
-    <button (click)="acceptOrDeclineFriendRequest(fr.id, 'reject')">Decline</button>
-  </li>
-</ul><p>Sent Friend Requests</p>
-<ul>
-  <li *ngFor="let sfr of sentFriendRequests">
-    {{sfr.to_user}}
-  </li>
-</ul>
-<p>Friends</p>
-<ul>
-  <li *ngFor="let f of friends">
-    {{f.username}}
-  </li>
-</ul>
+<ngb-accordion [closeOthers]="true" activeIds="static-1">
+  <ngb-panel title="Pending Friend Requests">
+    <ng-template ngbPanelContent>
+      <p>Friend Requests</p>
+      <ul>
+        <li *ngFor="let fr of friendRequests">
+          {{fr.from_user}}
+          {{fr.id}}
+          <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
+          <button (click)="acceptOrDeclineFriendRequest(fr.id, 'reject')">Decline</button>
+        </li>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Sent Friend Requests">
+    <ng-template ngbPanelContent>
+      <p>Sent Friend Requests</p>
+      <ul>
+        <li *ngFor="let sfr of sentFriendRequests">
+          {{sfr.to_user}}
+        </li>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Friends">
+    <ng-template ngbPanelContent>
+      <p>Friends</p>
+      <ul>
+        <li *ngFor="let f of friends">
+          {{f.username}}
+        </li>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
+
+
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
