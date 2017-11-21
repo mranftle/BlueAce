@@ -19,7 +19,18 @@ export class FriendsComponent implements OnInit{
   goHome(){
     this.router.navigateByUrl('/main');
   }
-
+  gotoProfile(){
+    this.router.navigateByUrl('/main/profile');
+  }
+  gotoSports(){
+    this.router.navigateByUrl('/main/sportsgame');
+  }
+  gotoFriends(){
+    this.router.navigateByUrl('/main/friends');
+  }
+  gotoCharities(){
+    this.router.navigateByUrl('/main/charities');
+  }
   getAllUsers() {
     this.friendService.getAllUsers().then(
       (allUsers) => {

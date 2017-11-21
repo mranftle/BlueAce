@@ -10,6 +10,19 @@
 </head>
 <body ng-model="main">
 <h1>Charities</h1>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Navigate Pages</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><button (click)="gotoSports()">Sports Games</button></li>
+      <li><button (click)="gotoCharities()">Charities</button></li>
+      <li><button (click)="gotoFriends()">Friends</button></li>
+      <li><button (click)="gotoProfile()">Profile</button></li>
+    </ul>
+  </div>
+</nav>
 <button (click)="goHome()">Home</button>
 <div class="container">
   <div class="row">

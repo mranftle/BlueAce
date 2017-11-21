@@ -11,7 +11,19 @@
 </head>
 <body ng-model="main">
 <h1>Bets</h1>
-
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Navigate Pages</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><button (click)="gotoSports()">Sports Games</button></li>
+      <li><button (click)="gotoCharities()">Charities</button></li>
+      <li><button (click)="gotoFriends()">Friends</button></li>
+      <li><button (click)="gotoProfile()">Profile</button></li>
+    </ul>
+  </div>
+</nav>
 
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
