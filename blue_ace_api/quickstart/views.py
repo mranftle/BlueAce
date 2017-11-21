@@ -36,6 +36,14 @@ class BetViewSet(viewsets.ModelViewSet):
     queryset = Bet.objects.all()
     serializer_class = BetSerializer
 
+    # list all bets for this user
+    def list(self, request):
+        home_bets = Bet.objects.filter(home_user=request.user.id)
+        away_bets = Bet.objects.filter(away_user=request.user.id)
+        bets = home_bets | away_bets
+        seralizer = self.serializer_class(bets, many=True)
+        return Response(seralizer.data)
+
 class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
