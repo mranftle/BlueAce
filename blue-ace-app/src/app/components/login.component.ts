@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
 
   @ViewChild('username') username: any;
   @ViewChild('password') password: any;
+  @ViewChild('email') email: any;
 
   constructor(private router:Router,
               private authService: AuthService){}
@@ -25,7 +26,9 @@ export class LoginComponent implements OnInit {
 
   signup() {
     let errMsg: string;
-    this.authService.signup(this.username.nativeElement.value, this.password.nativeElement.value)
+    this.authService.signup(this.username.nativeElement.value,
+                            this.password.nativeElement.value,
+                            this.email.nativeElement.value)
       .subscribe(
         data => {
           this.router.navigate((['/main']))
@@ -38,7 +41,9 @@ export class LoginComponent implements OnInit {
 
   login() {
     let errMsg: string;
-    this.authService.login(this.username.nativeElement.value, this.password.nativeElement.value)
+    this.authService.login(this.username.nativeElement.value,
+                           this.password.nativeElement.value,
+                           this.email.nativeElement.value)
       .subscribe(
         data => {
           this.router.navigate((['/main']))

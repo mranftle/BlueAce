@@ -14,8 +14,8 @@ export class AuthService {
   private signUpUrl= 'http://localhost:8000/signup/'
   constructor(private http: Http) {}
 
-  login(username: string, password: string) {
-    let body = JSON.stringify({username: username, password: password});
+  login(username: string, password: string, email: string) {
+    let body = JSON.stringify({username: username, password: password, email: email});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
     return this.http.post(this.userUrl,body,options)
@@ -30,8 +30,8 @@ export class AuthService {
       });
   }
 
-  signup(username: string, password: string) {
-    let body = JSON.stringify({username: username, password: password});
+  signup(username: string, password: string, email: string) {
+    let body = JSON.stringify({username: username, password: password, email: email});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
     return this.http.post(this.signUpUrl,body,options)
