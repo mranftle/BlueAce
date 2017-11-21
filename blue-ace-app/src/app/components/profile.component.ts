@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
+
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',
