@@ -1,5 +1,7 @@
 import {Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
+import {BetService} from "../services/bet.service";
+import {Bet} from "../entities/bet";
 
 @Component({
   selector: 'profile',
@@ -7,11 +9,33 @@ import { Router } from '@angular/router';
   styleUrls: ['../stylesheets/profile.component.css'],
 })
 
-export class ProfileComponent {
-
-  constructor(private router: Router){}
+export class ProfileComponent implements OnInit {
+  bets: Bet[];
+  constructor(private router: Router,
+              private betService: BetService){}
   goHome(){
     this.router.navigateByUrl('/main');
   }
 
+  getBets() {
+    this.betService.getBets().then(
+      (bets) => {
+        this.bets = bets.map(function(obj) {
+          let b = new Bet();
+          console.log(obj);
+          b.home_team_abb = obj.home_team_abb;
+          b.away_team_abb = obj.away_team_abb;
+          b.home_score = obj.home_score;
+          b.away_score = obj.away_score;
+          b.completed = obj.completed;
+          return b;
+        });
+      }
+    );
+    console.log(this.bets);
+  }
+
+  ngOnInit() {
+    this.getBets();
+  }
 }
