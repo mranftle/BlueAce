@@ -15,6 +15,7 @@ import {FriendsComponent} from './components/friends.component';
 import {ProfileComponent} from './components/profile.component';
 import {SportsGamesComponent} from './components/sportsgames.component';
 import {AuthGuard} from './guards/auth.guard';
+import {BetService} from "./services/bet.service";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {AuthGuard} from './guards/auth.guard';
   ],
   providers: [AuthService,
               FriendService,
+              BetService,
               AuthGuard],
   bootstrap: [AppComponent]
 })
