@@ -2,7 +2,6 @@ import {Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
 import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
-import {AuthService} from "../services/auth.service";
 
 @Component({
   selector: 'profile',
@@ -13,8 +12,7 @@ import {AuthService} from "../services/auth.service";
 export class ProfileComponent implements OnInit {
   bets: Bet[];
   constructor(private router: Router,
-              private betService: BetService,
-              private authService: AuthService){}
+              private betService: BetService){}
   goHome(){
     this.router.navigateByUrl('/main');
   }
@@ -48,10 +46,7 @@ export class ProfileComponent implements OnInit {
     );
     console.log(this.bets);
   }
-  logout(){
-    this.authService.logout()
-    this.router.navigateByUrl('/login');
-  }
+
   ngOnInit() {
     this.getBets();
   }

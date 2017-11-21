@@ -1,8 +1,11 @@
 import {Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
+<<<<<<< HEAD
+import {AuthService} from "../services/auth.service";
+=======
 import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
-import {AuthService} from "../services/auth.service";
+>>>>>>> 85d6e76e138a88214955d8a52573addfaf589100
 
 @Component({
   selector: 'profile',
@@ -10,11 +13,16 @@ import {AuthService} from "../services/auth.service";
   styleUrls: ['../stylesheets/profile.component.css'],
 })
 
+<<<<<<< HEAD
+export class ProfileComponent {
+
+  constructor(private router: Router, private authService: AuthService){}
+=======
 export class ProfileComponent implements OnInit {
   bets: Bet[];
   constructor(private router: Router,
-              private betService: BetService,
-              private authService: AuthService){}
+              private betService: BetService){}
+>>>>>>> 85d6e76e138a88214955d8a52573addfaf589100
   goHome(){
     this.router.navigateByUrl('/main');
   }
@@ -29,6 +37,10 @@ export class ProfileComponent implements OnInit {
   }
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
+  }
+  logout(){
+    this.authService.logout()
+    this.router.navigateByUrl('/login');
   }
 
   getBets() {
@@ -48,10 +60,7 @@ export class ProfileComponent implements OnInit {
     );
     console.log(this.bets);
   }
-  logout(){
-    this.authService.logout()
-    this.router.navigateByUrl('/login');
-  }
+
   ngOnInit() {
     this.getBets();
   }

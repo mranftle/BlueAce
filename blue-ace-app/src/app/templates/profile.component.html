@@ -26,6 +26,7 @@
     </ul>
   </div>
 </nav>
+
 <ngb-accordion [closeOthers]="true" activeIds="static-1">
   <ngb-panel title="Pending Bets">
     <ng-template ngbPanelContent>
@@ -49,6 +50,14 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
+
+
+<ul>
+  <li *ngFor="let b of bets">
+    {{ b.home_team_abb}}
+    {{ b.away_team_abb}}
+  </li>
+</ul>
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
