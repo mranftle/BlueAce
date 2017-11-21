@@ -7,9 +7,9 @@ import { Router } from "@angular/router";
 })
 
 export class SportsGamesComponent {
-
   constructor(private router:Router){}
   goHome(){
     this.router.navigateByUrl('/main');
   }
 }
+

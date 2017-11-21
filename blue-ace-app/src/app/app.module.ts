@@ -6,6 +6,7 @@ import {routing} from "./app.routing";
 import {LoginComponent} from "./components/login.component";
 import {MainPageComponent} from "./components/mainpage.component";
 import {AuthService} from "./services/auth.service";
+import {FriendService} from "./services/friend.service";
 import {HttpModule} from "@angular/http";
 
 import {CharitiesComponent} from './components/charities.component';
@@ -31,7 +32,9 @@ import {AuthGuard} from "./guards/auth.guard";
     HttpModule
 
   ],
-  providers: [AuthService, AuthGuard],
+  providers: [AuthService,
+              FriendService,
+              AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
