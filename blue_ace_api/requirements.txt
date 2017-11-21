@@ -6,3 +6,5 @@ django-cors-headers
 django-filter
 django-crontab
 MySQL-python
+django-friendship
+django-rest-friendship
