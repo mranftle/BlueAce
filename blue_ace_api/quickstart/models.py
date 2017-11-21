@@ -29,7 +29,7 @@ class Bet(models.Model):
 
 class Charity(models.Model):
     id = models.AutoField(primary_key=True)
-    name = models.CharField(max_length=30)
+    name = models.CharField(max_length=300)
     description = models.TextField()
-    url = models.CharField(max_length=50)
+    url = models.CharField(max_length=500)
     total_donated = models.IntegerField(default=0)
