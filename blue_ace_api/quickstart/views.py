@@ -36,6 +36,15 @@ class BetViewSet(viewsets.ModelViewSet):
     queryset = Bet.objects.all()
     serializer_class = BetSerializer
 
+    @detail_route(methods=['post'])
+    def accept_bet(self, request, pk=None):
+        bet = Bet.objects.filter(id=pk).update(completed=1)
+
+        return Response({
+            'status': 'Bet accepted',
+            'message': 'Bet accepted'
+        }, status=status.HTTP_200_OK)
+
     # list all bets for this user
     def list(self, request):
         home_bets = Bet.objects.filter(home_user=request.user.id)

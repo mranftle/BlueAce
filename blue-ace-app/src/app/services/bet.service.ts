@@ -34,6 +34,18 @@ export class BetService {
       .subscribe()
   }
 
+  acceptBet(bet_id:number) {
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+                                'Content-Type': 'application/json'});
+    let options = new RequestOptions(({headers:headers}));
+    let url = this.betUrl+ bet_id + '/accept_bet/';
+    this.http.post(url, null, options)
+      .map(res => res.json())
+      .catch((error:any) => 'Server error')
+      .subscribe()
+  }
+
   //more detailed error message to come, move to error file
   private handleError(error: any) {
     console.error('An error occurred', error);

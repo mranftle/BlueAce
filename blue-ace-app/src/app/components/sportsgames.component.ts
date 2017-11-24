@@ -2,6 +2,7 @@ import {Component, OnInit, ViewChild } from '@angular/core'
 import { Router } from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+import {BetService} from "../services/bet.service";
 @Component({
   selector: 'sports',
   templateUrl: '../templates/sportsgames.component.html',
@@ -11,7 +12,9 @@ import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 export class SportsGamesComponent {
   closeResult: string;
 
-  constructor(private router: Router, private authService: AuthService,
+  constructor(private router: Router,
+              private betService: BetService,
+              private authService: AuthService,
               private modalService:NgbModal){}
   goHome(){
     this.router.navigateByUrl('/main');
@@ -33,6 +36,10 @@ export class SportsGamesComponent {
     this.router.navigateByUrl('/login');
   }
 
+  acceptBet(bet_id:number) {
+    this.betService.acceptBet(bet_id);
+  }
+  
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
