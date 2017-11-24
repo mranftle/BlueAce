@@ -10,6 +10,8 @@ from serializers import UserSerializer, BetSerializer, CharitySerializer
 from rest_friendship.views import Friend, FriendshipRequest
 from django.core.mail import send_mail
 
+
+
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -48,5 +50,6 @@ class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
 
-def send_email(request):
-    pass
+def email(request):
+    send_mail("Your Subject", "This is a simple text email body.",
+              "Yamil Asusta <quintin.frerichs@gmail.com>", ["quintinfrerichs@sendgrid.com"])
