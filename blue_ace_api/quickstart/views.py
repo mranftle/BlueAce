@@ -15,6 +15,12 @@ class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
+    @detail_route(methods=['get'])
+    def get_user_by_id(self, request, pk=None):
+        u = User.objects.filter(id=pk)
+        serializer = UserSerializer(u.values()[0])
+        return Response(serializer.data['username'])
+
     # only return users who are not your friend
     def list(self, request):
         friends = Friend.objects.filter(from_user_id=request.user.id)

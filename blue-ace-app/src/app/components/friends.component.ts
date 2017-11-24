@@ -93,6 +93,7 @@ export class FriendsComponent implements OnInit{
             (response) => {
               var fr = new FriendRequest();
               fr.id = obj.id;
+              // fr.username = this.getUserById(fr.id);
               fr.from_user =obj.from_user;
               fr.to_user = obj.to_user;
               fr.username = response['username'];
@@ -113,6 +114,7 @@ export class FriendsComponent implements OnInit{
         this.sentFriendRequests = sentFriendRequests.map(function(obj) {
           var fr = new FriendRequest()
           fr.id = obj.pk;
+          // fr.username = this.getUserById(fr.id);
           fr.to_user = obj.to_user;
           fr.from_user =obj.from_user;
           fr.message = obj.message;
@@ -126,14 +128,23 @@ export class FriendsComponent implements OnInit{
   getUsersByEmail() {
     //
   }
-  trackByFn(index, item) {
-    return item.id;
+
+  //get user by id
+  getUserById(user_id:number) {
+    var username = this.friendService.getUserById(user_id).then(
+      username => {
+        console.log(username);
+      }
+    );
+    return username
   }
+
   ngOnInit() {
     this.getFriends();
     this.getAllUsers();
     this.getRequests();
     this.getSentRequests();
+    console.log(this.getUserById(1));
   }
 
 }

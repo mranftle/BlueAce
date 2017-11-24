@@ -44,12 +44,14 @@
   <li *ngFor="let fr of friendRequests">
     {{fr.from_user}}
     {{fr.id}}
+    {{fr.id}}
     <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
     <button (click)="acceptOrDeclineFriendRequest(fr.id, 'reject')">Decline</button>
   </li>
 </ul><p>Sent Friend Requests</p>
 <ul>
   <li *ngFor="let sfr of sentFriendRequests">
+    {{sfr.to_user}}
     {{sfr.to_user}}
   </li>
 </ul>

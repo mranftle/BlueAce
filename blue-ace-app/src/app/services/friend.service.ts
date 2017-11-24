@@ -20,10 +20,24 @@ export class FriendService {
   private acceptDeclineFriendRequestsUrl = 'http://localhost:8000/friendrequests/';
   constructor(private http: Http){}
 
+  // get username by user id
+  getUserById(user_id: number): Promise<any> {
+    let currentUser = localStorage.getItem('currenUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+                                'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers:headers});
+    let url = this.usersUrl + user_id + '/get_user_by_id/';
+    return this.http.get(url, options)
+      .toPromise()
+      .then(response => response.json().data)
+      .catch(this.handleError)
+  }
+
+  // get a list of all users who are not friends
   getAllUsers() {
     let currentUser = localStorage.getItem('currentUser');
     let headers = new Headers({ 'Authorization': currentUser,
-                                'Content-Type': 'application-json'});
+                                'Content-Type': 'application/json'});
     let options = new RequestOptions({headers:headers});
     return this.http.get(this.usersUrl, options)
       .toPromise()
