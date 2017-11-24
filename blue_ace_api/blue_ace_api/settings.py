@@ -25,6 +25,12 @@ SECRET_KEY = '++*4mu=4^o^@%c7sk-ubfrd6_(8kh#qv+2c8f&--d!cp+z%763'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'blueacetest@gmail.com'
+EMAIL_HOST_PASSWORD = '0zfCw3kz30Kg'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 ALLOWED_HOSTS = []
 
 CRONJOBS = [

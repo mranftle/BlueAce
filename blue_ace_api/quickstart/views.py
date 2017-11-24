@@ -8,7 +8,7 @@ from rest_framework.response import Response
 from models import Bet, Charity
 from serializers import UserSerializer, BetSerializer, CharitySerializer
 from rest_friendship.views import Friend, FriendshipRequest
-
+from django.core.mail import send_mail
 
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
@@ -48,3 +48,5 @@ class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
 
+def send_email(request):
+    pass
