@@ -58,4 +58,4 @@ class CharityViewSet(viewsets.ModelViewSet):
     serializer_class = CharitySerializer
 
 def send_email(request):
-    pass
+    send_mail("Something", "This is a message", "blueacetest@gmail.com", [request.email])

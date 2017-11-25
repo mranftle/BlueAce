@@ -4,6 +4,7 @@ import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
 import {AuthService} from "../services/auth.service";
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+import { NgIf } from '@angular/common';
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',
@@ -46,6 +47,12 @@ export class ProfileComponent implements OnInit {
           b.home_score = obj.home_score;
           b.away_score = obj.away_score;
           b.completed = obj.completed;
+          b.home_bet = obj.home_bet;
+          b.away_bet = obj.away_bet;
+          b.winner = obj.winner;
+          b.started = obj.started;
+          b.home_charity = obj.home_charity;
+          b.away_charity = obj.away_charity;
           return b;
         });
       }
