@@ -46,6 +46,7 @@ export class FriendsComponent implements OnInit{
           u.email = obj.email;
           return u;
         });
+
       }
     )
   }

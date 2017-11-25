@@ -57,5 +57,6 @@ class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
 
-def send_email(request):
-    send_mail("Something", "This is a message", "blueacetest@gmail.com", [request.email])
+class Email():
+    def send_email(self, request):
+        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])
