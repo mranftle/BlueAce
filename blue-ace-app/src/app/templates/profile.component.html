@@ -39,9 +39,9 @@
 <ngb-accordion [closeOthers]="true" activeIds="static-1">
   <ngb-panel title="Pending Bets">
     <ng-template ngbPanelContent>
-      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
-      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
-      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button>Accept Bet</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button (click)="acceptBet()">Accept Bet</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button (click)="acceptBet()">Accept Bet</button></ul>
+      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2<button (click)="acceptBet()">Accept Bet</button></ul>
     </ng-template>
   </ngb-panel>
   <ngb-panel title="Ongoing">
@@ -53,10 +53,46 @@
   </ngb-panel>
   <ngb-panel title="Completed">
     <ng-template ngbPanelContent>
-      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team1 Won!<button>Email Opponent</button></ul>
-      <ul>Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team2 Won!<button>Email Opponent</button></ul>
-      <ul>Home Team Score Away Team Score AmountHome AmountAwayview  Charity 1 Charity2 Team2 Won!<button>Email Opponent</button></ul>
-    </ng-template>
+      <ul>
+        <div>
+          Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team1 Won!
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+        </div>
+      </ul>
+      <ul>
+        <div>
+          Home Team Score Away Team Score AmountHome AmountAway Charity 1 Charity2 Team1 Won!
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>FIELDS TO PLACE A BET GO HERE</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+        </div>
+      </ul>    </ng-template>
   </ngb-panel>
 </ngb-accordion>
 

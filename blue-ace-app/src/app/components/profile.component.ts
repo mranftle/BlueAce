@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
 import {AuthService} from "../services/auth.service";
-
+import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',
@@ -11,11 +11,11 @@ import {AuthService} from "../services/auth.service";
 })
 
 export class ProfileComponent implements OnInit {
-
+  closeResult: string;
   bets: Bet[];
   constructor(private router: Router,
               private betService: BetService,
-              private authService: AuthService){}
+              private authService: AuthService, private modalService:NgbModal){}
   goHome(){
     this.router.navigateByUrl('/main');
   }
@@ -30,6 +30,9 @@ export class ProfileComponent implements OnInit {
   }
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
+  }
+  acceptBet(bet_id:number) {
+    this.betService.acceptBet(bet_id);
   }
 
   getBets() {
@@ -56,5 +59,21 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getBets();
   }
+  open(content) {
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
 
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
 }
