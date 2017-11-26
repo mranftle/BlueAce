@@ -1,7 +1,7 @@
 from rest_framework import viewsets, status
 from django.contrib.auth.models import User
-from models import Bet, Charity
-from serializers import UserSerializer, BetSerializer, CharitySerializer
+from models import Bet, Charity, SportsGame
+from serializers import UserSerializer, BetSerializer, CharitySerializer, SportsGameSerializer
 from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 
@@ -18,4 +18,8 @@ class BetViewSet(viewsets.ModelViewSet):
 class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
+
+class SportsGameViewSet(viewsets.ModelViewSet):
+    queryset = SportsGame.objects.all()
+    serializer_class = SportsGameSerializer
 

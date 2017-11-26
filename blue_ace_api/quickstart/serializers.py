@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from models import Bet, Charity
+from models import Bet, Charity, SportsGame
 
 class UserSerializer(serializers.HyperlinkedModelSerializer):
 
@@ -33,3 +33,13 @@ class CharitySerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Charity
         fields = ('name', 'description', 'url')
+
+class SportsGameSerializer(serializers.HyperlinkedModelSerializer):
+
+    def create(self, validated_data):
+        game = SportsGame.objects.create(**validated_data)
+        return game
+
+    class Meta:
+        model = SportsGame
+        fields = ('id', 'home_team', 'away_team', 'starts', 'home_team_abb', 'away_team_abb', 'stadium')

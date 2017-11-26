@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
-from quickstart.views import UserViewSet, BetViewSet, CharityViewSet
+from quickstart.views import UserViewSet, BetViewSet, CharityViewSet, SportsGameViewSet
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
 
@@ -23,6 +23,7 @@ router = routers.DefaultRouter()
 router.register(r'signup', UserViewSet, 'signup')
 router.register(r'bet', BetViewSet, 'bet')
 router.register(r'charity', CharityViewSet, 'charity')
+router.register(r'games', SportsGameViewSet, 'games')
 
 urlpatterns = [
     url(r'^', include(router.urls)),

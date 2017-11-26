@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+
+<ng-template #content let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{selectedGame.awayTeam}} @ {{selectedGame.homeTeam}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <label for="amount">Username</label>
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <input type="number" class="form-control" id="amount" placeholder="Bet Amount">
+      </div>
+    </div>
+    <div class="form-group">
+      <p>Against:</p>
+      <select class="form-control" id="friends" #r (change)="changeSelectedFriend(r.value)">
+        <option *ngFor="let friend of friends" [value]="friend">
+          {{friend}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <p>Charity</p>
+      <select class="form-control" id="charities" #t (change)="changeSelectedCharity(t.value)">
+        <option *ngFor="let charity of charities" [value]="charity">
+          {{charity}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="requestBet()">Request Bet</button>
+    <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
+
+<div class="card" *ngFor="let game of sportsGames">
+  <div class="card-header">
+    {{game.starts.toLocaleDateString()}}
+  </div>
+  <div class="card-block">
+    <h6 class="card-title">{{game.awayTeam}} @ {{game.homeTeam}}</h6>
+    <p></p>
+    <button class="btn btn-primary" (click)="open(content, game)">Place Bet</button>
+  </div>
+</div>
+
+</body>
+</html>
