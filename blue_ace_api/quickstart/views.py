@@ -63,7 +63,8 @@ class CharityViewSet(viewsets.ModelViewSet):
 
 class Email():
     def send_email(self, request):
-        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])class SportsGameViewSet(viewsets.ModelViewSet):
+        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])
+
+class SportsGameViewSet(viewsets.ModelViewSet):
     queryset = SportsGame.objects.all()
     serializer_class = SportsGameSerializer
-
