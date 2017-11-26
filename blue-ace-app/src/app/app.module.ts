@@ -16,6 +16,9 @@ import {ProfileComponent} from './components/profile.component';
 import {SportsGamesComponent} from './components/sportsgames.component';
 import {AuthGuard} from './guards/auth.guard';
 import {BetService} from "./services/bet.service";
+import {GamesComponent} from "./components/games.component";
+import {HttpModule} from "@angular/http";
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -26,12 +29,15 @@ import {BetService} from "./services/bet.service";
     FriendsComponent,
     ProfileComponent,
     SportsGamesComponent
+    GamesComponent
   ],
   imports: [
     NgbModule.forRoot(),
     routing,
     BrowserModule,
     HttpModule
+    HttpModule,
+    NgbModule.forRoot()
   ],
   providers: [AuthService,
               FriendService,

@@ -12,7 +12,6 @@ import {CharitiesComponent} from './components/charities.component';
 import {FriendsComponent} from './components/friends.component';
 import {ProfileComponent} from './components/profile.component';
 
-
 const appRoutes: Routes = [
 
   { path: 'login', component: LoginComponent},

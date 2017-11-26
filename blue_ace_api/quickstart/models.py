@@ -3,12 +3,12 @@ from django.contrib.auth.models import User
 
 class SportsGame(models.Model):
     id = models.AutoField(primary_key=True)
-    sport = models.CharField(max_length=20)
-    home = models.CharField(max_length=30)
-    away = models.CharField(max_length=30)
-    score1 = models.IntegerField()
-    score2 = models.IntegerField()
-    started = models.TimeField()
+    home_team = models.CharField(max_length=30)
+    away_team = models.CharField(max_length=30)
+    starts = models.DateTimeField()
+    home_team_abb = models.CharField(max_length=20)
+    away_team_abb = models.CharField(max_length=20)
+    stadium = models.CharField(max_length=30)
 
 class Bet(models.Model):
     id = models.AutoField(primary_key=True)

@@ -9,6 +9,10 @@ from models import Bet, Charity
 from serializers import UserSerializer, BetSerializer, CharitySerializer
 from rest_friendship.views import Friend, FriendshipRequest
 from django.core.mail import send_mail
+from models import Bet, Charity, SportsGame
+from serializers import UserSerializer, BetSerializer, CharitySerializer, SportsGameSerializer
+from django.views.decorators.csrf import csrf_exempt
+from rest_framework.response import Response
 
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
@@ -59,4 +63,7 @@ class CharityViewSet(viewsets.ModelViewSet):
 
 class Email():
     def send_email(self, request):
-        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])
+        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])class SportsGameViewSet(viewsets.ModelViewSet):
+    queryset = SportsGame.objects.all()
+    serializer_class = SportsGameSerializer
+
