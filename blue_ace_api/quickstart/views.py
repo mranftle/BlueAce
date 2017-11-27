@@ -1,17 +1,11 @@
-import json
 from rest_framework import viewsets, status
 from django.contrib.auth.models import User
-from rest_framework.decorators import authentication_classes, permission_classes, detail_route, list_route, api_view
+from rest_framework.decorators import permission_classes, detail_route
 from rest_framework.permissions import AllowAny
-from rest_framework.response import Response
-
-from models import Bet, Charity
-from serializers import UserSerializer, BetSerializer, CharitySerializer
 from rest_friendship.views import Friend, FriendshipRequest
 from django.core.mail import send_mail
 from models import Bet, Charity, SportsGame
 from serializers import UserSerializer, BetSerializer, CharitySerializer, SportsGameSerializer
-from django.views.decorators.csrf import csrf_exempt
 from rest_framework.response import Response
 
 @permission_classes([AllowAny, ])

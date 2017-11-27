@@ -17,6 +17,7 @@ import {BetService} from "./services/bet.service";
 import {GamesComponent} from "./components/games.component";
 import {HttpModule} from "@angular/http";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import {GameService} from "./services/games.service";
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
   providers: [AuthService,
               FriendService,
               BetService,
-              AuthGuard],
+              AuthGuard,
+              GameService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

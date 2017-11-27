@@ -17,20 +17,15 @@ export class GameService {
     //
   }
 
-  /**
-   * Get all s
-   * @returns {Promise<T>}
-   */
-  getAllGames(): Promise<any> {
-    return this.http.get(this.url)
+  getAllGames() {
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+      'Content-Type': 'application-json'});
+    let options = new RequestOptions({headers:headers});
+    return this.http.get(this.url, options)
       .toPromise()
-      .then(response => {
-
-        return response.json();
-      })
-      .catch(error => {
-          console.log(error);
-      });
+      .then(response => response.json())
+      .catch(error => console.error(error));
   }
 
   placeBet(game: SportsGame) {

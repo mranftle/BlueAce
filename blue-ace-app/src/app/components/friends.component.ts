@@ -33,7 +33,7 @@ export class FriendsComponent implements OnInit{
     this.router.navigateByUrl('/main/charities');
   }
   logout(){
-    this.authService.logout()
+    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
   getAllUsers() {
@@ -72,8 +72,8 @@ export class FriendsComponent implements OnInit{
   //get friends list
   getFriends() {
     this.friendService.getFriends().then(
-      (friends) => {
-        this.friends = friends.map(function(obj) {
+      (allFriends) => {
+        this.friends = allFriends.map(function(obj) {
           var f = new Friend();
           f.id = obj.pk;
           f.username = obj.username;

@@ -26,7 +26,7 @@ export class MainPageComponent {
     this.router.navigateByUrl('/main/charities');
   }
   logout(){
-    this.authService.logout()
+    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
 
