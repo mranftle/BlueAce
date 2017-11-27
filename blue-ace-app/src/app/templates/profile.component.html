@@ -29,24 +29,20 @@
   </div>
 
 </nav>
-<ul>
-<li *ngFor="let b of bets">
-  {{b.home_team_abb}}
-</li>
-</ul>
+
 <ngb-accordion [closeOthers]="true" activeIds="static-1">
   <ngb-panel title="Unaccepted Bets">
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
-        <div *ngIf="(b.started===0)">
+        <div *ngIf="(b.completed===0)">
           <p>Requested: </p>
         Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button (click)="acceptBet()">Accept Bet</button>
         </div>
-        <div *ngIf="(b.started===1)">
+        <div *ngIf="(b.completed===1)">
           <p>Pending: </p>
           Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button>Cancel Bet</button>
         </div>
-        <div *ngIf="(b.started===2)">
+        <div *ngIf="(b.completed !==0 && b.completed !==1)">
           <p>No Unaccepted Bets</p>
         </div>
       </ul>
@@ -55,11 +51,11 @@
   <ngb-panel title="Ongoing">
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
-      <div *ngIf="(b.started===2 && b.completed===false)">
+      <div *ngIf="(b.completed===2)">
         Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
       </div>
-        <div *ngIf="(b.started===1 || b.started === 0 || (b.started===2 && b.completed===true))">
-          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+        <div *ngIf="(b.completed!==2)">
+          <p>No Ongoing Bets</p>
         </div>
       </ul>
     </ng-template>
@@ -67,7 +63,7 @@
   <ngb-panel title="Completed">
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
-      <div *ngIf="((b.started===2) && (b.completed===true))">
+      <div *ngIf="(b.completed===3)">
           Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button (click)="acceptBet()">Accept Bet</button>
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
@@ -84,6 +80,9 @@
             </div>
           </ng-template>
           <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+        </div>
+        <div *ngIf="(b.completed!==3)">
+          <p>No Completed Bets</p>
         </div>
       </ul>
     </ng-template>

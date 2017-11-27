@@ -6,7 +6,7 @@ export class Bet {
   away_team_abb: string;
   home_score: number;
   away_score: number;
-  completed: boolean;
+  completed: number;
   home_bet: number;
   away_bet: number;
   winner: number;
