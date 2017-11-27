@@ -22,8 +22,8 @@ class Bet(models.Model):
     home_score = models.IntegerField(null=True)
     away_score = models.IntegerField(null=True)
     started = models.IntegerField()
-    home_charity = models.IntegerField()
-    away_charity = models.IntegerField()
+    home_charity = models.IntegerField(default=0)
+    away_charity = models.IntegerField(default=0)
     completed = models.BooleanField(default=False)
     winner = models.IntegerField(null=True)
 
