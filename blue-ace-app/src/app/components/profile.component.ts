@@ -57,7 +57,7 @@ export class ProfileComponent implements OnInit {
         });
       }
     );
-    console.log(this.bets[0]);
+    console.log(this.bets);
   }
   logout(){
     this.authService.logout()
