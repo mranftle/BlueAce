@@ -125,10 +125,10 @@ WSGI_APPLICATION = 'blue_ace_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blue_ace_db',
+        'NAME': 'bluea_ace_db',
         'USER': 'blueace',
         'PASSWORD': 'CO2PChWywXF3',
-        'HOST': 'blue-ace-production.clndviy1w6pl.us-east-1.rds.amazonaws.com',
+        'HOST': 'blue-ace-prod.colnzkjxalp2.us-east-2.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
