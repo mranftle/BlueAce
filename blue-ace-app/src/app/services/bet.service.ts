@@ -34,12 +34,25 @@ export class BetService {
       .subscribe()
   }
 
-  acceptBet(bet_id:number) {
+  acceptBet(bet_id:number, charity:string) {
+    let currentUser = localStorage.getItem('currentUser');
+    let body = JSON.stringify({charity: charity});
+    let headers = new Headers({ 'Authorization': currentUser,
+                                'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers:headers});
+    let url = this.betUrl+ bet_id + '/accept_bet/';
+    this.http.post(url, body, options)
+      .map(res => res.json())
+      .catch((error:any) => 'Server error')
+      .subscribe()
+  }
+
+  declineBet(bet_id: number) {
     let currentUser = localStorage.getItem('currentUser');
     let headers = new Headers({ 'Authorization': currentUser,
                                 'Content-Type': 'application/json'});
-    let options = new RequestOptions(({headers:headers}));
-    let url = this.betUrl+ bet_id + '/accept_bet/';
+    let options = new RequestOptions({headers:headers});
+    let url = this.betUrl + bet_id + '/decline_bet/';
     this.http.post(url, null, options)
       .map(res => res.json())
       .catch((error:any) => 'Server error')

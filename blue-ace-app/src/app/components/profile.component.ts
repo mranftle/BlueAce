@@ -32,8 +32,11 @@ export class ProfileComponent implements OnInit {
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
   }
-  acceptBet(bet_id:number) {
-    this.betService.acceptBet(bet_id);
+  acceptBet(bet_id:number, charity:string) {
+    this.betService.acceptBet(bet_id, charity);
+  }
+  declineBet(bet_id:number) {
+    this.betService.declineBet(bet_id);
   }
 
   getBets() {
@@ -57,8 +60,8 @@ export class ProfileComponent implements OnInit {
         });
       }
     );
-    console.log(this.bets[0]);
   }
+
   logout(){
     this.authService.logout()
     this.router.navigateByUrl('/login');
@@ -66,6 +69,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getBets();
   }
+
   open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
