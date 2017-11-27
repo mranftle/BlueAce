@@ -43,6 +43,15 @@ class BetViewSet(viewsets.ModelViewSet):
             'message': 'Bet accepted'
         }, status=status.HTTP_200_OK)
 
+    @detail_route(methods=['post'])
+    def decline_bet(self, request, pk=None):
+        bet = Bet.objects.filter(id=pk).delete()
+
+        return Response({
+            'status': 'Bet declined',
+            'message': 'Bet declined'
+        }, status=status.HTTP_200_OK)
+    
     # list all bets for this user
     def list(self, request):
         home_bets = Bet.objects.filter(home_user=request.user.id)
