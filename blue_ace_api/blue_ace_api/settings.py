@@ -111,18 +111,27 @@ WSGI_APPLICATION = 'blue_ace_api.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+#
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'blueace',
+#         'USER': 'blueace',
+#         'PASSWORD': 'blueace123',
+#         'HOST': '127.0.0.1',
+#         'PORT': '3306'
+#     }
+# }
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'blueace',
+        'NAME': 'blue_ace_db',
         'USER': 'blueace',
-        'PASSWORD': 'blueace123',
-        'HOST': '127.0.0.1',
+        'PASSWORD': 'CO2PChWywXF3',
+        'HOST': 'blue-ace-production.clndviy1w6pl.us-east-1.rds.amazonaws.com',
         'PORT': '3306'
     }
 }
-
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/

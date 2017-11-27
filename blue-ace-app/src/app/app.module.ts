@@ -18,6 +18,7 @@ import {GamesComponent} from "./components/games.component";
 import {HttpModule} from "@angular/http";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GameService} from "./services/games.service";
+import {CharityService} from "./services/charity.service";
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import {GameService} from "./services/games.service";
   ],
   providers: [AuthService,
               FriendService,
+              CharityService,
               BetService,
               AuthGuard,
               GameService],
