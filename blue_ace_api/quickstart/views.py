@@ -38,10 +38,12 @@ class BetViewSet(viewsets.ModelViewSet):
     @detail_route(methods=['post'])
     def accept_bet(self, request, pk=None):
         body_unicode = request.body.decode('utf-8')
-        body = json.locals(body_unicode)
+        body = json.loads(body_unicode)
         charity = body['charity']
-        bet = Bet.objects.filter(id=pk).update(completed=1)
-        if bet.home_charity is None:
+        Bet.objects.filter(id=pk).update(completed=1)
+        bet = Bet.objects.get(id=pk)
+        print bet
+        if bet.home_charity is 0:
             Bet.objects.filter(id=pk).update(home_charity=charity)
         else:
             Bet.objects.filter(id=pk).update(away_charity=charity)
