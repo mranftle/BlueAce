@@ -34,7 +34,7 @@ export class BetService {
       .subscribe()
   }
 
-  acceptBet(bet_id:number, charity:string) {
+  acceptBet(bet_id:number, charity:number) {
     let currentUser = localStorage.getItem('currentUser');
     let body = JSON.stringify({charity: charity});
     let headers = new Headers({ 'Authorization': currentUser,

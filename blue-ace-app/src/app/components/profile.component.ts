@@ -32,8 +32,8 @@ export class ProfileComponent implements OnInit {
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
   }
-  acceptBet(bet_id:number) {
-    this.betService.acceptBet(bet_id);
+  acceptBet(bet_id:number, charity:number) {
+    this.betService.acceptBet(bet_id, charity);
   }
 
   getBets() {
