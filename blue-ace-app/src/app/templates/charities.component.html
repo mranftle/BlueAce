@@ -15,15 +15,124 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Navigate Pages</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><button (click)="goHome()">Home</button></li>
-      <li><a href="#">Sports Games</a></li>
-      <li><a href="#">Charities</a></li>
-      <li><a href="#">Friends</a></li>
-      <li><a href="#">Profile</a></li>
+    <ul class="buttons">
+      <li><button (click)="goHome()">Home</button></li>
+      <li><button (click)="gotoSports()">Sports Games</button></li>
+      <li><button (click)="gotoCharities()">Charities</button></li>
+      <li><button (click)="gotoFriends()">Friends</button></li>
+      <li><button (click)="gotoProfile()">Bets</button></li>
+      <li><button (click)="logout()">Logout</button></li>
     </ul>
   </div>
 </nav>
+
+{{charities}}
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/images.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Boys & Girls Clubs of America</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=3380">View on Charity Navigator</a>
+          <br>
+          Formed in 1906, Boys & Girls Clubs of America (BGCA) is a national organization of local chapters which provide after-school programs for young people. Boys & Girls Clubs annually serve nearly 4 million young people, through membership and community outreach, in some 4,100 Club facilities throughout the country and BGCA-affiliated Youth Centers on U.S. military installations worldwide. The mission is to enable all young people, especially those who need us most, to reach their full potential as productive, caring, responsible citizens, by providing a world-class Club Experience that assures success is within reach of every young person who enters our doors, with all members on track to graduate from high school with a plan for the future, demonstrating good character and citizenship, and living a healthy lifestyle.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/acs.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">American Cancer Society</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=6495">View on Charity Navigator</a>
+          <br>
+          The American Cancer Society's mission is to save lives, celebrate lives, and lead the fight for a world without cancer.        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/aha.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">American Heart Association</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=3260">View on Charity Navigator</a>
+          <br>
+          The American Heart Association is the nation's oldest and largest voluntary organization dedicated to fighting heart disease and stroke. To improve the lives of all Americans, we provide public health education in a variety of ways. We're the nation's leader in CPR education training. We help people understand the importance of healthy lifestyle choices. We provide science-based treatment guidelines to healthcare professionals to help them provide quality care to their patients. We educate lawmakers, policymakers and the public as we advocate for changes to protect and improve the health of our communities. We have funded more than $3.8 billion in heart disease and stroke research, more than any organization outside the federal government.  With your help, we are working toward improving the cardiovascular health of all Americans by 20 percent, and reducing deaths from cardiovascular diseases and stroke by 20 percent, all by the year 2020.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/redcross.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">American National Red Cross</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=3277">View on Charity Navigator</a>
+          <br>
+          Since its founding in 1881 by visionary leader Clara Barton, the American Red Cross has been the nation's premier emergency response organization. We bring shelter, food and comfort to those affected by disasters, large and small. We collect lifesaving donated blood and supply it to patients in need. We provide support to our men and women in military bases around the world, and to the families they leave behind. We train communities in CPR, first aid and other skills that save lives. And we assist our neighbors abroad with critical disaster response, preparedness and disease prevention efforts. We are able to do all this by mobilizing the power of volunteers and the generosity of donors.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/pp.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Planned Parenthood</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=4338">View on Charity Navigator</a>
+          <br>
+          Planned Parenthood Federation of America (PPFA) is America's most trusted provider of reproductive health care. For more than 90 years, Planned Parenthood has promoted a commonsense approach to women's health and well-being, based on respect for each individual's right to make informed, independent decisions about health, sex, and family planning. PPFA works to provide trusted community healthcare; inform and educated the community; lead the reproductive health and rights movement; and advance global health. The heart of Planned Parenthood is in the local community. Our 94 unique, locally governed affiliates nationwide operate more than 850 health centers, which reflect the diverse needs of their communities.        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/wwf.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">World Wildlife Fund</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=4770">View on Charity Navigator</a>
+          <br>
+          Founded in 1961, World Wildlife Fund's (WWF) mission is the conservation of nature. Using the best available scientific knowledge and advancing that knowledge where we can, we work to preserve the diversity and abundance of life on Earth and the health of ecological systems by: protecting natural areas and wild populations of plants and animals, including endangered species; promoting sustainable approaches to the use of renewable natural resources; and promoting more efficient use of resources and energy and the maximum reduction of pollution. We are committed to reversing the degradation of our planet's natural environment and to building a future in which human needs are met in harmony with nature. We recognize the critical relevance of human numbers, poverty and consumption patterns to meeting these goals.
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="media">
+        <div class="media-left">
+          <a href="#">
+            <img class="media-object" src="../assets/feeding.png" height="64" width="64" alt="...">
+          </a>
+        </div>
+        <div class="media-body">
+          <h4 class="media-heading">Feeding America</h4>
+          <a href="https://www.charitynavigator.org/index.cfm?bay=search.summary&orgid=5271">View on Charity Navigator</a>
+          <br>
+          Feeding America is the nationwide network of 200 food banks that leads the fight against hunger in the United States. Together, we provide food to more than 46 million people through 60,000 food pantries and meal programs in communities across America. Feeding America also supports programs that improve food security among the people we serve; educates the public about the problem of hunger; and advocates for legislation that protects people from going hungry. Individuals, charities, businesses and government all have a role in ending hunger. Donate. Volunteer. Advocate. Educate. Together we can solve hunger.        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->

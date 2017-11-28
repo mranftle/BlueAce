@@ -4,11 +4,11 @@
 
 html {
   overflow-y: scroll;
+  background-color: orangered;
 }
 
 body {
-  background: #c1bdba;
-  font-family: 'Titillium Web', sans-serif;
+  background-color: #fc4a1a;
 }
 
 a {

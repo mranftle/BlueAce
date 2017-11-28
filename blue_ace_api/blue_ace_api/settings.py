@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.8/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+import datetime
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,6 +26,12 @@ SECRET_KEY = '++*4mu=4^o^@%c7sk-ubfrd6_(8kh#qv+2c8f&--d!cp+z%763'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'blueacetest@gmail.com'
+EMAIL_HOST_PASSWORD = '0zfCw3kz30Kg'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
 ALLOWED_HOSTS = []
 
 CRONJOBS = [
@@ -33,16 +40,16 @@ CRONJOBS = [
 
 # CRONTAB_COMMAND_SUFFIX = '2>&1'
 # Application definition
-# REST_FRAMEWORK = {
-#     'DEFAULT_PERMISSION_CLASSES': (
-#         'rest_framework.permissions.IsAuthenticated',
-#     ),
-#     'DEFAULT_AUTHENTICATION_CLASSES': (
-#         'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
-#         'rest_framework.authentication.SessionAuthentication',
-#         'rest_framework.authentication.BasicAuthentication',
-#     ),
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_jwt.authentication.JSONWebTokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.BasicAuthentication',
+    ),
+}
 
 INSTALLED_APPS = (
     'django.contrib.admin',
@@ -52,9 +59,12 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
     'django_crontab',
     'corsheaders',
-    'quickstart'
+    'quickstart',
+    'friendship',
+    'rest_friendship'
 )
 
 MIDDLEWARE_CLASSES = (
@@ -67,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'quickstart.views.ExceptionLoggingMiddleware'
 )
 
 CORS_ORIGIN_ALLOW_ALL = True
@@ -101,7 +112,7 @@ WSGI_APPLICATION = 'blue_ace_api.wsgi.application'
 #         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
 #     }
 # }
-
+#
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
@@ -112,7 +123,16 @@ DATABASES = {
         'PORT': '3306'
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.mysql',
+#         'NAME': 'bluea_ace_db',
+#         'USER': 'blueace',
+#         'PASSWORD': 'CO2PChWywXF3',
+#         'HOST': 'blue-ace-prod.colnzkjxalp2.us-east-2.rds.amazonaws.com',
+#         'PORT': '3306'
+#     }
+# }
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.8/topics/i18n/
@@ -132,3 +152,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.8/howto/static-files/
 
 STATIC_URL = '/static/'
+
+JWT_AUTH = {
+'JWT_REFRESH_EXPIRATION_DELTA': datetime.timedelta(days=7),
+'JWT_EXPIRATION_DELTA' : datetime.timedelta(days=7)
+}

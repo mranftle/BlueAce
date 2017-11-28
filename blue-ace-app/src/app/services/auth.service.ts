@@ -6,16 +6,15 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-
-
 @Injectable()
 export class AuthService {
   private userUrl = 'http://localhost:8000/api-token-auth/';
-  private signUpUrl= 'http://localhost:8000/signup/'
+  private signUpUrl= 'http://localhost:8000/signup/';
+  private idUrl = 'http://localhost:8000/ids';
   constructor(private http: Http) {}
 
-  login(username: string, password: string) {
-    let body = JSON.stringify({username: username, password: password});
+  login(username: string, password: string, email: string) {
+    let body = JSON.stringify({username: username, password: password, email: email});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
     return this.http.post(this.userUrl,body,options)
@@ -24,14 +23,13 @@ export class AuthService {
         let user = response.json();
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log(user);
           localStorage.setItem('currentUser', 'JWT '.concat(user.token));
         }
       });
   }
 
-  signup(username: string, password: string) {
-    let body = JSON.stringify({username: username, password: password});
+  signup(username: string, password: string, email: string) {
+    let body = JSON.stringify({username: username, password: password, email: email});
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers});
     return this.http.post(this.signUpUrl,body,options)
@@ -53,5 +51,16 @@ export class AuthService {
 
   getJwt() {
     return localStorage.getItem('currentUser');
+  }
+
+  getUserIdFromJwt() {
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+      'Content-Type': 'application-json'});
+    let options = new RequestOptions({headers:headers});
+    return this.http.get(this.idUrl, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(error => console.error(error));
   }
 }

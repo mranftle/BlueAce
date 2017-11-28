@@ -1,35 +1,92 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+  <!--&lt;!&ndash; Required meta tags &ndash;&gt;-->
+  <!--<meta charset="utf-8">-->
+  <!--<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">-->
 
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-</head>
-<body ng-model="main">
-<h1>SportsGame</h1>
+  <!--&lt;!&ndash; Bootstrap CSS &ndash;&gt;-->
+  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">-->
+<!--</head>-->
+<!--<body ng-model="main">-->
+
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Navigate Pages</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><button (click)="goHome()">Home</button></li>
-      <li><a href="#">Sports Games</a></li>
-      <li><a href="#">Charities</a></li>
-      <li><a href="#">Friends</a></li>
-      <li><a href="#">Profile</a></li>
+    <ul class="buttons">
+      <li><button (click)="goHome()">Home</button></li>
+      <li><button (click)="gotoSports()">Sports Games</button></li>
+      <li><button (click)="gotoCharities()">Charities</button></li>
+      <li><button (click)="gotoFriends()">Friends</button></li>
+      <li><button (click)="gotoProfile()">Bets</button></li>
+      <li><button (click)="logout()">Logout</button></li>
     </ul>
   </div>
 </nav>
 
+<ng-template #content class="modal" let-c="close" let-d="dismiss">
+  <div class="modal-header">
+    <h4 class="modal-title">{{selectedGame.awayTeam}} @ {{selectedGame.homeTeam}}</h4>
+    <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <a><i class="fa fa-close" data-dismiss="modal" #closeBtn></i></a>
+  </div>
+  <div class="modal-body">
+    <div class="form-group">
+      <p>Team to bet on:</p>
+      <select name="team" id="team-selection" #q (change)="changeSelectedTeam(q.value)">
+        <option value="home">{{selectedGame.homeTeam}}</option>
+        <option value="away">{{selectedGame.awayTeam}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <p for="amount">Bet amount</p>
+      <div class="input-group">
+        <div class="input-group-addon">$</div>
+        <input type="number" class="form-control" #amount placeholder="Bet Amount" (change)="changeBetAmount(amount.value)">
+      </div>
+    </div>
+    <div class="form-group">
+      <p>Against:</p>
+      <select class="form-control" id="friends" #r (change)="changeSelectedFriend(r.value)">
+        <option *ngFor="let friend of friends" [value]="friend">
+          {{friend.username}}
+        </option>
+      </select>
+    </div>
+    <div class="form-group">
+      <p>Charity</p>
+      <select class="form-control" id="charities" #t (change)="changeSelectedCharity(t.value)">
+        <option *ngFor="let charity of charities" [value]="charity">
+          {{charity.name}}
+        </option>
+      </select>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-primary" (click)="requestBet(content)">Request Bet</button>
+    <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
+  </div>
+</ng-template>
 
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</body>
-</html>
+<div class="card" *ngFor="let game of sportsGames">
+  <div class="card-header">
+    {{game.starts.toLocaleDateString()}} | {{getNiceTime(game.starts)}}
+  </div>
+  <div class="card-block">
+    <h6 class="card-title">{{game.awayTeam}} @ {{game.homeTeam}}</h6>
+    <p></p>
+    <button class="btn btn-primary" (click)="open(content, game)">Place Bet</button>
+  </div>
+</div>
+
+<!--&lt;!&ndash; jQuery first, then Tether, then Bootstrap JS. &ndash;&gt;-->
+<!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>-->
+<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>-->
+<!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>-->
+<!--</body>-->
+<!--</html>-->
 

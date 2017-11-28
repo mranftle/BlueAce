@@ -7,23 +7,112 @@
 
   <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+  <script src="../app.module.ts"></script>
 </head>
 <body ng-model="main">
-<h1>Profile</h1>
+<h1>Bets</h1>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Navigate Pages</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><button (click)="goHome()">Home</button></li>
-      <li><a href="#">Sports Games</a></li>
-      <li><a href="#">Charities</a></li>
-      <li><a href="#">Friends</a></li>
-      <li><a href="#">Profile</a></li>
-    </ul>
+    <div id="menu">
+      <ul class="buttons">
+        <li><button (click)="goHome()">Home</button></li>
+        <li><button (click)="gotoSports()">Sports Games</button></li>
+        <li><button (click)="gotoCharities()">Charities</button></li>
+        <li><button (click)="gotoFriends()">Friends</button></li>
+        <li><button (click)="gotoProfile()">Bets</button></li>
+        <li><button (click)="logout()">Logout</button></li>
+      </ul>
+    </div>
   </div>
+
 </nav>
+
+<ngb-accordion [closeOthers]="true" activeIds="static-1">
+  <ngb-panel title="Unaccepted Bets">
+    <ng-template ngbPanelContent>
+      <ul *ngFor="let b of bets">
+        <div *ngIf="(b.completed===0)">
+          <p>Requested: </p>
+        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          <button (click)="declineBet()">Decline Bet</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
+        </div>
+        <div *ngIf="(b.completed===1)">
+          <p>Pending: </p>
+          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          <button (click)="declineBet()">Decline Bet</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
+        </div>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Ongoing">
+    <ng-template ngbPanelContent>
+      <ul *ngFor="let b of bets">
+      <div *ngIf="(b.completed===2)">
+        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+      </div>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+  <ngb-panel title="Completed">
+    <ng-template ngbPanelContent>
+      <ul *ngFor="let b of bets">
+      <div *ngIf="(b.completed===3)">
+          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+        </div>
+      </ul>
+    </ng-template>
+  </ngb-panel>
+</ngb-accordion>
+
+
 
 
 <!-- jQuery first, then Tether, then Bootstrap JS. -->
