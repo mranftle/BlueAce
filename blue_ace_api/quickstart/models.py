@@ -25,6 +25,7 @@ class Bet(models.Model):
     away_charity = models.IntegerField(null=True)
     completed = models.IntegerField()
     winner = models.IntegerField(null=True)
+    requester = models.IntegerField()
 
 class Charity(models.Model):
     id = models.AutoField(primary_key=True)
