@@ -8,11 +8,13 @@ from django.core.mail import send_mail
 from models import Charity, SportsGame, Bet
 from serializers import UserSerializer, CharitySerializer, SportsGameSerializer, BetSerializer
 from rest_framework.response import Response
+from rest_framework.authtoken.models import Token
 
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
+
 
     # only return users who are not your friend
     def list(self, request):
@@ -85,3 +87,13 @@ class ExceptionLoggingMiddleware(object):
         serializer = BetSerializer(data=request.body)
         if not serializer.is_valid():
             print serializer.errors
+
+class AnotherUserViewSet(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def list(self, request):
+        from rest_framework_jwt.authentication import JSONWebTokenAuthentication
+        user, token = JSONWebTokenAuthentication().authenticate(request)
+        id = user.id
+        return Response({'id' : id})
