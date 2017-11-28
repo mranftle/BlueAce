@@ -10,6 +10,8 @@ from serializers import UserSerializer, CharitySerializer, SportsGameSerializer,
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
+
+
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
@@ -74,6 +76,7 @@ class CharityViewSet(viewsets.ModelViewSet):
     queryset = Charity.objects.all()
     serializer_class = CharitySerializer
 
+
 class Email():
     def send_email(self, request):
         send_mail("Check the result of your bet on BlueAce!", "Test email", "blueacetest@gmail.com", [request.email])
@@ -97,3 +100,4 @@ class AnotherUserViewSet(viewsets.ModelViewSet):
         user, token = JSONWebTokenAuthentication().authenticate(request)
         id = user.id
         return Response({'id' : id})
+
