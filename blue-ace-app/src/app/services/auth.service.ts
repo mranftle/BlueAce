@@ -8,9 +8,9 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthService {
-  private userUrl = 'http://blueace.win:8000/api-token-auth/';
-  private signUpUrl= 'http://blueace.win:8000/signup/';
-  private idUrl = 'http://blueace.win:8000/ids';
+  private userUrl = 'https://blueace.win:8000/api-token-auth/';
+  private signUpUrl= 'https://blueace.win:8000/signup/';
+  private idUrl = 'https://blueace.win:8000/ids';
 
   // private userUrl = 'http://localhost:8000/api-token-auth/';
   // private signUpUrl= 'http://localhost:8000/signup/';
