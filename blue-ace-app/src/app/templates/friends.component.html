@@ -35,7 +35,6 @@ All Users
 <ul>
   <li *ngFor="let user of allUsers">
     {{user.username}}
-    {{user.id}}
     <button (click)="addFriend(user.id)">Add Friend</button>
   </li>
 </ul>
@@ -45,8 +44,7 @@ All Users
       <p>Friend Requests</p>
       <ul>
         <li *ngFor="let fr of friendRequests">
-          {{fr.from_user}}
-          {{fr.id}}
+          {{fr.username}}
           <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
           <button (click)="acceptOrDeclineFriendRequest(fr.id, 'reject')">Decline</button>
         </li>
@@ -58,7 +56,7 @@ All Users
       <p>Sent Friend Requests</p>
       <ul>
         <li *ngFor="let sfr of sentFriendRequests">
-          {{sfr.to_user}}
+          {{sfr.username}}
         </li>
       </ul>
     </ng-template>

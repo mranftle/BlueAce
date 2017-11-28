@@ -37,7 +37,7 @@
         <div *ngIf="(b.requester!==userId && b.completed === 1)">
           {{b.requester}}
           <p>Requested: </p>
-        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}}
           <button (click)="declineBet(b.id)">Decline</button>
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
@@ -66,7 +66,7 @@
         </div>
         <div *ngIf="(b.requester===userId && b.completed ===1)">
           <p>Pending: </p>
-          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
           <button (click)="declineBet(b.id)">Cancel Bet</button>
         </div>
       </ul>
@@ -76,7 +76,7 @@
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
       <div *ngIf="(b.completed===2)">
-        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
       </div>
       </ul>
     </ng-template>
@@ -85,7 +85,7 @@
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
       <div *ngIf="(b.completed===3)">
-          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
               <h4 class="modal-title">Place Bet</h4>
