@@ -36,14 +36,43 @@
       <ul *ngFor="let b of bets">
         <div *ngIf="(b.completed===0)">
           <p>Requested: </p>
-        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button (click)="acceptBet()">Accept Bet</button>
+        Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          <button (click)="declineBet()">Decline Bet</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
         </div>
         <div *ngIf="(b.completed===1)">
           <p>Pending: </p>
-          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button>Cancel Bet</button>
-        </div>
-        <div *ngIf="(b.completed !==0 && b.completed !==1)">
-          <p>No Unaccepted Bets</p>
+          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
+          <button (click)="declineBet()">Decline Bet</button>
+          <ng-template #content let-c="close" let-d="dismiss">
+            <div class="modal-header">
+              <h4 class="modal-title">Place Bet</h4>
+              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Something else</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+            </div>
+          </ng-template>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
         </div>
       </ul>
     </ng-template>
@@ -54,9 +83,6 @@
       <div *ngIf="(b.completed===2)">
         Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
       </div>
-        <div *ngIf="(b.completed!==2)">
-          <p>No Ongoing Bets</p>
-        </div>
       </ul>
     </ng-template>
   </ngb-panel>
@@ -64,7 +90,7 @@
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
       <div *ngIf="(b.completed===3)">
-          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}<button (click)="acceptBet()">Accept Bet</button>
+          Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
               <h4 class="modal-title">Place Bet</h4>
@@ -80,9 +106,6 @@
             </div>
           </ng-template>
           <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
-        </div>
-        <div *ngIf="(b.completed!==3)">
-          <p>No Completed Bets</p>
         </div>
       </ul>
     </ng-template>
