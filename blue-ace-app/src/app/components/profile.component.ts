@@ -4,7 +4,6 @@ import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
 import {AuthService} from "../services/auth.service";
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
-import { NgIf } from '@angular/common';
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',
@@ -35,7 +34,9 @@ export class ProfileComponent implements OnInit {
   acceptBet(bet_id:number, charity:number) {
     this.betService.acceptBet(bet_id, charity);
   }
-
+  declineBet(bet_id:number) {
+    this.betService.declineBet(bet_id);
+  }
   getBets() {
     this.betService.getBets().then(
       (bets) => {
@@ -57,6 +58,15 @@ export class ProfileComponent implements OnInit {
       }
     );
   }
+  // noPending(){
+  //   let none = true;
+  //   for(const b in this.bets)
+  //     if(b === 0 || b.completed === 1){
+  //       none = false;
+  //     }
+  //   }
+  //   return none;
+  // }
   logout(){
     this.authService.logout();
     this.router.navigateByUrl('/login');
