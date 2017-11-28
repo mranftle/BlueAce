@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 export class AuthService {
   private userUrl = 'http://localhost:8000/api-token-auth/';
   private signUpUrl= 'http://localhost:8000/signup/';
+  private idUrl = 'http://localhost:8000/ids';
   constructor(private http: Http) {}
 
   login(username: string, password: string, email: string) {
@@ -50,5 +51,16 @@ export class AuthService {
 
   getJwt() {
     return localStorage.getItem('currentUser');
+  }
+
+  getUserIdFromJwt() {
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+      'Content-Type': 'application-json'});
+    let options = new RequestOptions({headers:headers});
+    return this.http.get(this.idUrl, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(error => console.error(error));
   }
 }

@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild } from '@angular/core'
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core'
 import { Router } from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
@@ -10,6 +10,8 @@ import {FriendService} from "../services/friend.service";
 import {CharityService} from "../services/charity.service";
 import {Charity} from "../entities/charity";
 import {Bet} from "../entities/bet";
+import * as moment from 'moment';
+
 @Component({
   selector: 'sports',
   templateUrl: '../templates/sportsgames.component.html',
@@ -17,6 +19,9 @@ import {Bet} from "../entities/bet";
 })
 
 export class SportsGamesComponent implements OnInit {
+
+  modalReference: any;
+
   // Selected team
   selectedTeam: string;
 
@@ -36,6 +41,7 @@ export class SportsGamesComponent implements OnInit {
   betAmount: number;
 
   ngOnInit() {
+    console.log(this.getNiceTime(new Date()));
     this.getGames();
     this.getFriends();
 
@@ -87,6 +93,11 @@ export class SportsGamesComponent implements OnInit {
     )
   }
 
+  getNiceTime(date: Date) {
+    let a = moment(date);
+    return a.format("h:mm");
+  }
+
   changeSelectedFriend(friend: Friend) {
     this.selectedFriend = friend;
   }
@@ -123,30 +134,45 @@ export class SportsGamesComponent implements OnInit {
     });
   }
 
-  requestBet() {
-    let bet = new Bet();
-    bet.home_team_abb = this.selectedGame.homeTeamAbbreviation;
-    bet.away_team_abb = this.selectedGame.awayTeamAbbreviation;
-    bet.completed = 0;
-    bet.started = this.selectedGame.starts.getTime() / 1000;
-    bet.bet_amount = Number(this.betAmount);
-    bet.game = this.selectedGame.gameId;
-    bet.winner = null;
-    bet.home_score = 0;
-    bet.away_score = 0;
-    if (this.selectedTeam === 'home') {
-      bet.home_user = 0;
-      bet.home_charity = this.selectedCharity.id;
-      bet.away_charity = null;
-      bet.away_user = null;
-    } else {
-      bet.away_user = 0;
-      bet.away_charity = this.selectedCharity.id;
-      bet.home_charity = -1;
-      bet.home_user = -1;
-    }
-    console.log(JSON.stringify({bet}));
-    this.betService.saveBet(bet);
+  requestBet(content) {
+    this.authService.getUserIdFromJwt().then(
+      (response) => {
+        let userId = response.id;
+        let bet = new Bet();
+        bet.home_team_abb = this.selectedGame.homeTeamAbbreviation;
+        bet.away_team_abb = this.selectedGame.awayTeamAbbreviation;
+        bet.completed = 0;
+        bet.started = this.selectedGame.starts.getTime() / 1000;
+        bet.bet_amount = Number(this.betAmount);
+        if (bet.bet_amount <= 0) {
+          alert('Bet amount must be greater than 0!');
+        }
+        bet.game = this.selectedGame.gameId;
+        bet.winner = null;
+        bet.home_score = 0;
+        bet.away_score = 0;
+        if (this.selectedTeam === 'home') {
+          bet.home_user = userId;
+          bet.home_charity = this.selectedCharity.id;
+          bet.away_charity = null;
+          bet.away_user = null;
+        } else {
+          bet.away_user = userId;
+          bet.away_charity = this.selectedCharity.id;
+          bet.home_charity = null;
+          bet.home_user = null;
+        }
+        console.log(JSON.stringify({bet}));
+        return bet;
+      }
+    ).then(
+      (bet) => {
+        if (bet.bet_amount > 0) {
+          this.betService.saveBet(bet);
+          this.modalReference.close();
+        }
+      }
+    );
   }
 
 
@@ -187,7 +213,7 @@ export class SportsGamesComponent implements OnInit {
     }
 
     if (this.selectedFriend && this.selectedCharity) {
-      this.modalService.open(content);
+      this.modalReference = this.modalService.open(content);
     }
 
   }

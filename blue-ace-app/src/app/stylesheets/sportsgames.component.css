@@ -2,3 +2,11 @@
   display: inline;
   list-style: none;
 }
+
+#content *, .card * {
+  font-size: 14px;
+}
+
+.card {
+  margin-bottom: 10px;
+}
