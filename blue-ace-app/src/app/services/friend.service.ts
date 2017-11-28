@@ -14,7 +14,7 @@ import {Friend} from "../entities/friend";
 @Injectable()
 export class FriendService {
   private usersUrl = 'https://blueace.win:8000/signup/';
-  private friendsUrl = 'https://localhost:8000/friends/';
+  private friendsUrl = 'https://blueace.win:8000/friends/';
   private friendRequestsUrl = 'https://blueace.win:8000/friends/requests/';
   private sentFriendRequestUrl = 'https://blueace.win:8000/friends/sent_requests/';
   private acceptDeclineFriendRequestsUrl = 'https://blueace.win:8000/friendrequests/';
