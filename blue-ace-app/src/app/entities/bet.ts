@@ -7,10 +7,12 @@ export class Bet {
   home_score: number;
   away_score: number;
   completed: number;
-  home_bet: number;
-  away_bet: number;
+  bet_amount: number;
   winner: number;
   started: number;
   home_charity: number;
   away_charity: number;
+  home_user: number;
+  away_user: number;
+  game: number;
 }

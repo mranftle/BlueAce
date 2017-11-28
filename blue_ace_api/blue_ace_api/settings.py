@@ -77,6 +77,7 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.middleware.security.SecurityMiddleware',
+    'quickstart.views.ExceptionLoggingMiddleware'
 )
 
 CORS_ORIGIN_ALLOW_ALL = True

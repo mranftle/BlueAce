@@ -4,6 +4,7 @@
 
 import {Injectable} from "@angular/core";
 import {Http, Headers, RequestOptions} from "@angular/http";
+import {Bet} from "../entities/bet";
 
 @Injectable()
 export class BetService {
@@ -22,9 +23,9 @@ export class BetService {
       .catch(this.handleError);
   }
 
-  saveBet(bet:any) {
+  saveBet(bet: Bet) {
     let currentUser = localStorage.getItem('currentUser');
-    let body = JSON.stringify({bet});
+    let body = JSON.stringify(bet);
     let headers = new Headers({ 'Authorization': currentUser,
                                 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers:headers});

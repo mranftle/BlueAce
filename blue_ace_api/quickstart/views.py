@@ -5,8 +5,8 @@ from rest_framework.decorators import permission_classes, detail_route
 from rest_framework.permissions import AllowAny
 from rest_friendship.views import Friend, FriendshipRequest
 from django.core.mail import send_mail
-from models import Bet, Charity, SportsGame
-from serializers import UserSerializer, BetSerializer, CharitySerializer, SportsGameSerializer
+from models import Charity, SportsGame, Bet
+from serializers import UserSerializer, CharitySerializer, SportsGameSerializer, BetSerializer
 from rest_framework.response import Response
 
 @permission_classes([AllowAny, ])
@@ -42,12 +42,10 @@ class BetViewSet(viewsets.ModelViewSet):
         charity = body['charity']
         Bet.objects.filter(id=pk).update(completed=1)
         bet = Bet.objects.get(id=pk)
-        print bet
-        if bet.home_charity is 0:
+        if bet.home_charity is None:
             Bet.objects.filter(id=pk).update(home_charity=charity)
         else:
             Bet.objects.filter(id=pk).update(away_charity=charity)
-
         return Response({
             'status': 'Bet accepted',
             'message': 'Bet accepted'
@@ -81,3 +79,9 @@ class Email():
 class SportsGameViewSet(viewsets.ModelViewSet):
     queryset = SportsGame.objects.all()
     serializer_class = SportsGameSerializer
+
+class ExceptionLoggingMiddleware(object):
+    def process_request(self, request):
+        serializer = BetSerializer(data=request.body)
+        if not serializer.is_valid():
+            print serializer.errors
