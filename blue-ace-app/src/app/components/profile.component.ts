@@ -6,8 +6,10 @@ import {AuthService} from "../services/auth.service";
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 import {CharityService} from "../services/charity.service";
 import {Charity} from "../entities/charity";
+import {EmailService} from"../services/email.service"
 @Component({
   selector: 'profile',
+  providers:[EmailService],
   templateUrl: '../templates/profile.component.html',
   styleUrls: ['../stylesheets/profile.component.css'],
 })
@@ -21,7 +23,7 @@ export class ProfileComponent implements OnInit {
   constructor(private router: Router,
               private betService: BetService,
               private charityService: CharityService,
-              private authService: AuthService, private modalService:NgbModal){}
+              private authService: AuthService, private modalService:NgbModal, private emailService:EmailService){}
   gotoProfile(){
     this.router.navigateByUrl('/main/profile');
   }
@@ -59,8 +61,9 @@ export class ProfileComponent implements OnInit {
   acceptBet() {
     this.betService.acceptBet(this.selectedBet, this.selectedCharity.id);
     window.location.reload();
-
-
+  }
+  sendMail(){
+    this.emailService.sendEmail("quintin.frerichs@gmail.com");
   }
   getBets() {
     this.betService.getBets().then(

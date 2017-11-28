@@ -16,13 +16,14 @@ Including another URLconf
 import rest_friendship.urls
 from django.conf.urls import include, url
 from django.contrib import admin
-from quickstart.views import UserViewSet, BetViewSet, CharityViewSet, SportsGameViewSet, AnotherUserViewSet
+from quickstart.views import UserViewSet, BetViewSet, CharityViewSet, SportsGameViewSet, AnotherUserViewSet, Email
 from rest_framework_jwt.views import obtain_jwt_token
 from rest_framework import routers
 
 router = routers.DefaultRouter()
 router.register(r'signup', UserViewSet, 'signup')
 router.register(r'bet', BetViewSet, 'bet')
+router.register(r'email', Email, 'email')
 router.register(r'charity', CharityViewSet, 'charity')
 router.register(r'games', SportsGameViewSet, 'games')
 router.register(r'ids', AnotherUserViewSet, 'ids')

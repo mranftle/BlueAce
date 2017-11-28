@@ -85,21 +85,24 @@
       <ul *ngFor="let b of bets">
       <div *ngIf="(b.completed===3)">
           Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Place Bet</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Something else</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-            </div>
-          </ng-template>
-          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+          <!--<ng-template #content let-c="close" let-d="dismiss">-->
+            <!--<div class="modal-header">-->
+              <!--<h4 class="modal-title">Send Email</h4>-->
+              <!--<button type="button" class="close" aria-label="Close" (click)="d('Cross click')">-->
+                <!--<span aria-hidden="true">&times;</span>-->
+              <!--</button>-->
+            <!--</div>-->
+            <!--<div class="modal-body">-->
+              <!--<input type="text" class="form-control" #amount placeholder="Address">-->
+              <!--<input type="text" class="form-control" #amount placeholder="Email Body">-->
+            <!--</div>-->
+            <!--<div class="modal-footer">-->
+              <!--<button type="button" class="btn btn-outline-light" (click)="sendMail()">Send Email</button>-->
+              <!--<button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>-->
+            <!--</div>-->
+          <!--</ng-template>-->
+          <!--<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>-->
+        <button (click)="sendMail()">Send Email</button>
         </div>
       </ul>
     </ng-template>

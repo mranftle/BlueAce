@@ -76,7 +76,7 @@ class CharityViewSet(viewsets.ModelViewSet):
 
 class Email():
     def send_email(self, request):
-        send_mail(request.subject, request.body, "blueacetest@gmail.com", [request.email])
+        send_mail("Check the result of your bet on BlueAce!", "Test email", "blueacetest@gmail.com", [request.email])
 
 class SportsGameViewSet(viewsets.ModelViewSet):
     queryset = SportsGame.objects.all()

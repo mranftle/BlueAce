@@ -1,22 +1,25 @@
 import {Injectable} from '@angular/core';
 import {Http, Headers, RequestOptions} from '@angular/http';
-
+import 'rxjs/add/operator/toPromise';
+import 'rxjs/add/operator/catch';
+import 'rxjs/add/operator/map';
 @Injectable()
 export class EmailService {
-  private betUrl = 'https://localhost/email/'
+  private emailUrl = 'https://blueace.win/email/';
 
   constructor(private http: Http){}
-  /*
-  send_email(subject:string, body:string, email:string){
-    let subject =
-    return this.http.get(this.betUrl, options)
-      .toPromise()
-      .then(response => response.json())
-      .catch(this.handleError);
+  sendEmail(address: string) {
+    let body = JSON.stringify({address});
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+      'Content-Type': 'application/json'});
+    let options = new RequestOptions({ headers:headers });
+    console.log(body);
+    this.http.post(this.emailUrl,body,options) // ...using post request
+      .map(res => res.json()) // ...and calling .json() on the response to return data
+      .catch((error:any) => 'Server error') //...errors if
+      .subscribe();
   }
-
-  */
-
   //more detailed error message to come, move to error file
   private handleError(error: any) {
     console.error('An error occurred', error);
