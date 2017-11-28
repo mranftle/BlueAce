@@ -4,7 +4,7 @@ import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
 import {AuthService} from "../services/auth.service";
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
-import { NgIf } from '@angular/common';
+
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',

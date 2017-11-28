@@ -14,19 +14,24 @@ services:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
     labels:
       - com.github.jrcs.letsencrypt_nginx_proxy_companion.nginx_proxy=true
-  # letsencrypt-nginx:
-  #   image: jrcs/letsencrypt-nginx-proxy-companion
-  #   container_name: letsencrypt-nginx
-  #   volumes:
-  #     - "/etc/nginx/certs:/etc/nginx/certs:rw"
-  #     - "/var/run/docker.sock:/var/run/docker.sock:ro"
-  #   volumes_from:
-  #     - "nginx-proxy"
+  letsencrypt-nginx:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    container_name: letsencrypt-nginx
+    volumes:
+      - "/etc/nginx/certs:/etc/nginx/certs:rw"
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    volumes_from:
+      - "nginx-proxy"
   blue_ace_api:
     container_name: blue_ace_api
     build: ./blue_ace_api
     expose:
       - "8000"
+    environment:
+      - VIRTUAL_HOST=blueace.win
+      - VIRTUAL_PORT=8000
+      - LETSENCRYPT_HOST=blueace.win
+      - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
   blue_ace_app:
@@ -34,5 +39,10 @@ services:
     build: ./blue-ace-app
     expose:
       - "4200"
+    environment:
+      - VIRTUAL_HOST=blueace.fun
+      - VIRTUAL_PORT=4200
+      - LETSENCRYPT_HOST=blueace.fun
+      - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"

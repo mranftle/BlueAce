@@ -7,7 +7,8 @@ import {Http, Headers, RequestOptions} from "@angular/http";
 
 @Injectable()
 export class BetService {
-  private betUrl = 'http://localhost:8000/bet/'
+  private betUrl = 'https://blueace.win/bet/';
+  // private betUrl = 'http://localhost:8000/bet/'
 
   constructor(private http:Http){}
 
