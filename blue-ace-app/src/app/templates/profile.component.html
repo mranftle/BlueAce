@@ -1,35 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-  <script src="../app.module.ts"></script>
-</head>
-<body ng-model="main">
-<h1>Bets</h1>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Navigate Pages</a>
-    </div>
+    <div class="navbar-header"></div>
     <div id="menu">
       <ul class="buttons">
-        <li><button (click)="goHome()">Home</button></li>
-        <li><button (click)="gotoSports()">Sports Games</button></li>
-        <li><button (click)="gotoCharities()">Charities</button></li>
-        <li><button (click)="gotoFriends()">Friends</button></li>
-        <li><button (click)="gotoProfile()">Bets</button></li>
-        <li><button (click)="logout()">Logout</button></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoSports()">Games</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoCharities()">Charities</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoFriends()">Friends</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoProfile()">Bets</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="logout()">Logout</a></li>
       </ul>
     </div>
   </div>
-
 </nav>
 
+<h1 class="display-3">Bets</h1>
 <ngb-accordion [closeOthers]="true" activeIds="static-1">
   <ngb-panel title="Unaccepted Bets">
     <ng-template ngbPanelContent>
@@ -84,8 +68,29 @@
   <ngb-panel title="Completed">
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
-      <div *ngIf="(b.completed===3)">
-        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
+        <div *ngIf="(b.completed===3)">
+          <h3>Result</h3>
+          <h3>{{b.home_team_abb}} : {{b.home_score}}</h3>
+          <h3>{{b.away_team_abb}} : {{b.away_score}}</h3>
+          <hr>
+
+          <!-- If user won, show them a congrats message-->
+          <div *ngIf="b.winner === userId">
+            <h3>You won!</h3>
+            <div *ngIf="b.home_user === userId">
+              <p>${{b.bet_amount}} was donated to {{getCharityName(b.home_charity)}}</p>
+            </div>
+            <div *ngIf="b.away_user === userId"><p>${{b.bet_amount}} was donated to
+              {{getCharityName(b.away_charity)}}</p>
+            </div>
+          </div>
+
+          <!--Otherwise, present them with what they should pay-->
+          <div *ngIf="b.winner != userId">
+            <h3>Sorry, you lost...</h3>
+            <div *ngIf="b.home_user === userId"><p>Please donate to {{getCharityName(b.away_charity)}}</p></div>
+            <div *ngIf="b.away_user === userId"><p>Please donate to {{getCharityName(b.home_charity)}}</p></div>
+          </div>
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
               <h4 class="modal-title">Place Bet</h4>
@@ -106,13 +111,3 @@
     </ng-template>
   </ngb-panel>
 </ngb-accordion>
-
-
-
-
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</body>
-</html>

@@ -222,3 +222,18 @@ body {
   border-top-right-radius: 0;
 }
 
+h1 {
+  text-shadow: 2px 1px 5px rgba(0, 0, 0, 1);
+  font-family: 'Yesteryear', cursive;
+  text-align: center;
+  font-size: 100px;
+  padding-top: 30px;
+}
+
+.btn {
+  margin-top: 20px;
+}
+
+input {
+  font-size: 14px;
+}

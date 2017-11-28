@@ -4,7 +4,6 @@
 
 html {
   overflow-y: scroll;
-  background-color: midnightblue;
 }
 
 body {
@@ -175,4 +174,12 @@ textarea {
 .forgot {
   margin-top: -20px;
   text-align: right;
+}
+
+* {
+  font-family: 'Quicksand', sans-serif;
+}
+
+li a{
+  margin-top: 10px;
 }
