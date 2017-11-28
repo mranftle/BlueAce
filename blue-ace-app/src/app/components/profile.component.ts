@@ -14,6 +14,7 @@ import {Charity} from "../entities/charity";
 
 export class ProfileComponent implements OnInit {
   closeResult: string;
+  userId: number;
   bets: Bet[];
   charities: Charity[];
   selectedBet: number;
@@ -77,6 +78,7 @@ export class ProfileComponent implements OnInit {
           b.bet_amount = obj.bet_amount;
           b.winner = obj.winner;
           b.started = obj.started;
+          b.requester = obj.requester;
           b.home_charity = obj.home_charity;
           b.away_charity = obj.away_charity;
           return b;
@@ -93,6 +95,16 @@ export class ProfileComponent implements OnInit {
   //   }
   //   return none;
   // }
+
+  getUserId() {
+    this.authService.getUserIdFromJwt().then(
+      (response) => {
+        this.userId = response.id;
+        console.log(response.id);
+      }
+    );
+  }
+
   logout(){
     this.authService.logout();
     this.router.navigateByUrl('/login');
@@ -100,6 +112,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.getBets();
     this.getCharities();
+    this.getUserId();
   }
   open(content, bet_id:number) {
     this.selectedBet = bet_id;

@@ -16,4 +16,5 @@ export class Bet {
   home_user: number;
   away_user: number;
   game: number;
+  requester: number;
 }

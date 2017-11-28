@@ -34,7 +34,8 @@
   <ngb-panel title="Unaccepted Bets">
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
-        <div *ngIf="(b.completed===0)">
+        <div *ngIf="(b.requester!==userId)">
+          {{b.requester}}
           <p>Requested: </p>
         Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
           <button (click)="declineBet(b.id)">Decline</button>
@@ -63,7 +64,7 @@
           </ng-template>
           <button class="btn btn-lg btn-outline-primary" (click)="open(content,b.id)">Accept</button>
         </div>
-        <div *ngIf="(b.completed===1)">
+        <div *ngIf="(b.requester===userId)">
           <p>Pending: </p>
           Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
           <button (click)="declineBet(b.id)">Cancel Bet</button>
