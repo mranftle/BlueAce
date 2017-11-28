@@ -32,7 +32,7 @@ EMAIL_HOST_PASSWORD = '0zfCw3kz30Kg'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [u'blueace.win']
 
 CRONJOBS = [
     ('* * * * *', 'cron.validate_win', '>/tmp/cron_logs')

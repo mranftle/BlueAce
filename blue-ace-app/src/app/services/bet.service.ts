@@ -8,7 +8,8 @@ import {Bet} from "../entities/bet";
 
 @Injectable()
 export class BetService {
-  private betUrl = 'http://localhost:8000/bet/'
+  // private betUrl = 'http://localhost:8000/bet/'
+  private betUrl = 'http://blueace.win:8000/bet/'
 
   constructor(private http:Http){}
 
