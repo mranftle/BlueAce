@@ -11,11 +11,11 @@ export class AuthService {
   // private usernameUrl = 'https://blueace.win/users/';
   // private userUrl = 'https://blueace.win/api-token-auth/';
   // private signUpUrl= 'https://blueace.win/signup/';
-  // private idUrl = 'https://blueace.win/ids';
+  // private idUrl = 'https://blueace.win/ids/';
   private usernameUrl = 'http://localhost:8000/users/'
   private userUrl = 'http://localhost:8000/api-token-auth/';
   private signUpUrl= 'http://localhost:8000/signup/';
-  private idUrl = 'http://localhost:8000/ids';
+  private idUrl = 'http://localhost:8000/ids/';
   constructor(private http: Http) {}
 
   login(username: string, password: string, email: string) {
