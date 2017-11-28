@@ -37,42 +37,36 @@
         <div *ngIf="(b.completed===0)">
           <p>Requested: </p>
         Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
-          <button (click)="declineBet()">Decline Bet</button>
+          <button (click)="declineBet(b.id)">Decline</button>
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
-              <h4 class="modal-title">Place Bet</h4>
+              <h4 class="modal-title">Accept Bet</h4>
               <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body">
-              <p>Something else</p>
+              <p>Pick your charity</p>
+              <div class="form-group">
+                <p>Charity</p>
+                <select class="form-control" [(ngModel)]="charity" (ngModelChange)="changeSelectedCharity($event)">
+                  <option *ngFor="let charity of charities" [ngValue]="charity">
+                    {{charity.name}}
+                  </option>
+                </select>
+              </div>
             </div>
             <div class="modal-footer">
+              <button type="button" class="btn btn-outline-light" (click)="acceptBet()">Accept Bet</button>
               <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
             </div>
           </ng-template>
-          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
+          <button class="btn btn-lg btn-outline-primary" (click)="open(content,b.id)">Accept</button>
         </div>
         <div *ngIf="(b.completed===1)">
           <p>Pending: </p>
           Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Charity 1: {{b.home_charity}} Charity2: {{b.away_charity}}
-          <button (click)="declineBet()">Decline Bet</button>
-          <ng-template #content let-c="close" let-d="dismiss">
-            <div class="modal-header">
-              <h4 class="modal-title">Place Bet</h4>
-              <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
-                <span aria-hidden="true">&times;</span>
-              </button>
-            </div>
-            <div class="modal-body">
-              <p>Something else</p>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-            </div>
-          </ng-template>
-          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Accept</button>
+          <button (click)="declineBet(b.id)">Cancel Bet</button>
         </div>
       </ul>
     </ng-template>

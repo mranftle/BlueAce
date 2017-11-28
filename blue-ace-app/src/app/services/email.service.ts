@@ -3,7 +3,7 @@ import {Http, Headers, RequestOptions} from '@angular/http';
 
 @Injectable()
 export class EmailService {
-  private betUrl = 'http://localhost:8000/email/'
+  private betUrl = 'https://localhost/email/'
 
   constructor(private http: Http){}
   /*

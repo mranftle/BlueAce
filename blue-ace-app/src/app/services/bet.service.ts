@@ -8,7 +8,8 @@ import {Bet} from "../entities/bet";
 
 @Injectable()
 export class BetService {
-  private betUrl = 'http://localhost:8000/bet/'
+  // private betUrl = 'http://localhost:8000/bet/'
+  private betUrl = 'https://blueace.win/bet/'
 
   constructor(private http:Http){}
 
@@ -36,12 +37,14 @@ export class BetService {
   }
 
   acceptBet(bet_id:number, charity:number) {
+    console.log(bet_id, charity);
     let currentUser = localStorage.getItem('currentUser');
     let body = JSON.stringify({charity: charity});
     let headers = new Headers({ 'Authorization': currentUser,
                                 'Content-Type': 'application/json'});
     let options = new RequestOptions({headers:headers});
     let url = this.betUrl+ bet_id + '/accept_bet/';
+    console.log('send');
     this.http.post(url, body, options)
       .map(res => res.json())
       .catch((error:any) => 'Server error')

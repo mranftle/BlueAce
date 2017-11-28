@@ -31,7 +31,7 @@ export class SportsGamesComponent implements OnInit {
 
   // Friends
   friends: Friend[];
-  selectedFriend: Friend;
+  selectedFriend: number
 
   // Charities
   charities: Charity[];
@@ -44,13 +44,14 @@ export class SportsGamesComponent implements OnInit {
     console.log(this.getNiceTime(new Date()));
     this.getGames();
     this.getFriends();
+    this.getCharities();
 
-    //this.getCharities();
-    let c = new Charity();
-    c.id = 1;
-    c.name = 'Boys and Girls Club';
-    this.charities = [];
-    this.charities.push(c);
+    // //this.getCharities();
+    // let c = new Charity();
+    // c.id = 1;
+    // c.name = 'Boys and Girls Club';
+    // this.charities = [];
+    // this.charities.push(c);
 
     this.selectedTeam = 'home';
   }
@@ -87,10 +88,13 @@ export class SportsGamesComponent implements OnInit {
   getCharities() {
     this.charityService.getCharities().then(
       (charities) => {
-        this.charities = charities;
-      }
-
-    )
+        this.charities = charities.map(function(obj) {
+          let c = new Charity();
+          c.id = obj.id;
+          c.name= obj.name;
+          return c
+        });
+      });
   }
 
   getNiceTime(date: Date) {
@@ -99,7 +103,8 @@ export class SportsGamesComponent implements OnInit {
   }
 
   changeSelectedFriend(friend: Friend) {
-    this.selectedFriend = friend;
+    console.log(friend);
+    // this.selectedFriend = friend;
   }
 
   changeSelectedCharity(charity: Charity) {
@@ -141,7 +146,7 @@ export class SportsGamesComponent implements OnInit {
         let bet = new Bet();
         bet.home_team_abb = this.selectedGame.homeTeamAbbreviation;
         bet.away_team_abb = this.selectedGame.awayTeamAbbreviation;
-        bet.completed = 0;
+        bet.completed = 1;
         bet.started = this.selectedGame.starts.getTime() / 1000;
         bet.bet_amount = Number(this.betAmount);
         if (bet.bet_amount <= 0) {
@@ -155,14 +160,13 @@ export class SportsGamesComponent implements OnInit {
           bet.home_user = userId;
           bet.home_charity = this.selectedCharity.id;
           bet.away_charity = null;
-          bet.away_user = null;
+          bet.away_user = this.selectedFriend;
         } else {
           bet.away_user = userId;
           bet.away_charity = this.selectedCharity.id;
           bet.home_charity = null;
-          bet.home_user = null;
+          bet.home_user = this.selectedFriend;
         }
-        console.log(JSON.stringify({bet}));
         return bet;
       }
     ).then(
@@ -203,7 +207,7 @@ export class SportsGamesComponent implements OnInit {
       // Can't bet without friends!
       alert('Must make friends before placing bets!');
     } else {
-      this.selectedFriend = this.friends[0];
+      this.selectedFriend = this.friends[0].id;
     }
 
     if (this.charities === null) {

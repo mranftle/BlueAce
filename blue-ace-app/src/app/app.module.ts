@@ -19,6 +19,7 @@ import {HttpModule} from "@angular/http";
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {GameService} from "./services/games.service";
 import {CharityService} from "./services/charity.service";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {CharityService} from "./services/charity.service";
   ],
   imports: [
     routing,
+    FormsModule,
     BrowserModule,
     HttpModule,
     NgbModule.forRoot()

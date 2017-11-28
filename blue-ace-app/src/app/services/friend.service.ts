@@ -13,11 +13,16 @@ import {Friend} from "../entities/friend";
 
 @Injectable()
 export class FriendService {
-  private usersUrl = 'http://localhost:8000/signup/';
-  private friendsUrl = 'http://localhost:8000/friends/';
-  private friendRequestsUrl = 'http://localhost:8000/friends/requests/';
-  private sentFriendRequestUrl = 'http://localhost:8000/friends/sent_requests/';
-  private acceptDeclineFriendRequestsUrl = 'http://localhost:8000/friendrequests/';
+  private usersUrl = 'https://blueace.win/signup/';
+  private friendsUrl = 'https://blueace.win/friends/';
+  private friendRequestsUrl = 'https://blueace.win/friends/requests/';
+  private sentFriendRequestUrl = 'https://blueace.win/friends/sent_requests/';
+  private acceptDeclineFriendRequestsUrl = 'https://blueace.win/friendrequests/';
+  // private usersUrl = 'http://localhost:8000/signup/';
+  // private friendsUrl = 'http://localhost:8000/friends/';
+  // private friendRequestsUrl = 'http://localhost:8000/friends/requests/';
+  // private sentFriendRequestUrl = 'http://localhost:8000/friends/sent_requests/';
+  // private acceptDeclineFriendRequestsUrl = 'http://localhost:8000/friendrequests/';
   constructor(private http: Http){}
 
   getAllUsers() {
