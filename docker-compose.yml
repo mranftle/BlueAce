@@ -30,8 +30,8 @@ services:
     environment:
       - VIRTUAL_HOST=blueace.win
       - VIRTUAL_PORT=8000
-      - LETSENCRYPT_HOST=blueace.win
-      - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
+      # - LETSENCRYPT_HOST=blueace.win
+      # - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
   blue_ace_app:
@@ -41,8 +41,8 @@ services:
       - "4200"
     environment:
       - VIRTUAL_HOST=blueace.fun
-      - VIRTUAL_PORT=4200
-      - LETSENCRYPT_HOST=blueace.fun
-      - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
+      # - VIRTUAL_PORT=4200
+      # - LETSENCRYPT_HOST=blueace.fun
+      # - LETSENCRYPT_EMAIL=matthew.ranftle@gmail.com
     volumes:
       - "/var/run/docker.sock:/tmp/docker.sock:ro"
