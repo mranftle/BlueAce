@@ -42,7 +42,7 @@ class BetViewSet(viewsets.ModelViewSet):
         body_unicode = request.body.decode('utf-8')
         body = json.loads(body_unicode)
         charity = body['charity']
-        Bet.objects.filter(id=pk).update(completed=1)
+        Bet.objects.filter(id=pk).update(completed=2)
         bet = Bet.objects.get(id=pk)
         if bet.home_charity is None:
             Bet.objects.filter(id=pk).update(home_charity=charity)

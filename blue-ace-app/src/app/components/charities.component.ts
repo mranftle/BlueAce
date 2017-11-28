@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import {AuthService} from "../services/auth.service";
 import {CharityService} from "../services/charity.service";
 import {Charity} from "../entities/charity";
+import {type} from "os";
 @Component({
   selector:'charities',
   templateUrl: '../templates/charities.component.html',
@@ -39,9 +40,18 @@ export class CharitiesComponent implements OnInit {
   getCharities() {
     this.charityService.getCharities().then(
       (charities) => {
-        this.charities = charities;
+        this.charities = charities.map(function(obj) {
+          var c = new Charity();
+          c.id = obj.id;
+          c.name = obj.name;
+          c.description = obj.description;
+          c.url = obj.url;
+          c.total_donated = obj.total_donated;
+          console.log(obj);
+          console.log(c);
+          return c;
+        });
       }
-
     )
   }
 

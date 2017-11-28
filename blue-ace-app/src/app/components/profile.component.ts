@@ -4,6 +4,8 @@ import {BetService} from "../services/bet.service";
 import {Bet} from "../entities/bet";
 import {AuthService} from "../services/auth.service";
 import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
+import {CharityService} from "../services/charity.service";
+import {Charity} from "../entities/charity";
 @Component({
   selector: 'profile',
   templateUrl: '../templates/profile.component.html',
@@ -13,12 +15,13 @@ import {NgbModal, ModalDismissReasons} from "@ng-bootstrap/ng-bootstrap";
 export class ProfileComponent implements OnInit {
   closeResult: string;
   bets: Bet[];
+  charities: Charity[];
+  selectedBet: number;
+  selectedCharity: Charity;
   constructor(private router: Router,
               private betService: BetService,
+              private charityService: CharityService,
               private authService: AuthService, private modalService:NgbModal){}
-  goHome(){
-    this.router.navigateByUrl('/main');
-  }
   gotoProfile(){
     this.router.navigateByUrl('/main/profile');
   }
@@ -31,11 +34,33 @@ export class ProfileComponent implements OnInit {
   gotoCharities(){
     this.router.navigateByUrl('/main/charities');
   }
-  acceptBet(bet_id:number, charity:number) {
-    this.betService.acceptBet(bet_id, charity);
-  }
+
   declineBet(bet_id:number) {
     this.betService.declineBet(bet_id);
+    window.location.reload();
+
+  }
+  changeSelectedCharity(charity: Charity) {
+    this.selectedCharity = charity;
+  }
+
+  getCharities() {
+    this.charityService.getCharities().then(
+      (charities) => {
+        this.charities = charities.map(function(obj) {
+          let c = new Charity();
+          c.id = obj.id;
+          c.name= obj.name;
+          return c
+        });
+      });
+
+  }
+  acceptBet() {
+    this.betService.acceptBet(this.selectedBet, this.selectedCharity.id);
+    window.location.reload();
+
+
   }
   getBets() {
     this.betService.getBets().then(
@@ -43,6 +68,7 @@ export class ProfileComponent implements OnInit {
         this.bets = bets.map(function(obj) {
           let b = new Bet();
           console.log(obj);
+          b.id = obj.id;
           b.home_team_abb = obj.home_team_abb;
           b.away_team_abb = obj.away_team_abb;
           b.home_score = obj.home_score;
@@ -73,8 +99,10 @@ export class ProfileComponent implements OnInit {
   }
   ngOnInit() {
     this.getBets();
+    this.getCharities();
   }
-  open(content) {
+  open(content, bet_id:number) {
+    this.selectedBet = bet_id;
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

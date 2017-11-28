@@ -19,7 +19,7 @@ class BetSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Bet
-        fields = ('home_user', 'away_user', 'bet_amount', 'game', 'home_team_abb',
+        fields = ('id', 'home_user', 'away_user', 'bet_amount', 'game', 'home_team_abb',
                   'away_team_abb', 'home_score', 'away_score', 'started', 'home_charity', 'away_charity',
                   'completed', 'winner')
 
@@ -31,7 +31,7 @@ class CharitySerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
         model = Charity
-        fields = ('name', 'description', 'url')
+        fields = ('id', 'name', 'description', 'url', 'total_donated')
 
 class SportsGameSerializer(serializers.HyperlinkedModelSerializer):
 
