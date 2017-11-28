@@ -94,8 +94,8 @@ export class SportsGamesComponent implements OnInit {
   }
 
   getNiceTime(date: Date) {
-    let a = moment(date);
-    return a.format("h:mm");
+    let a = moment(date).utcOffset(-1);
+    return a.format("h:mm A");
   }
 
   changeSelectedFriend(friend: Friend) {
