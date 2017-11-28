@@ -19,9 +19,9 @@
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
         <div *ngIf="(b.requester!==userId && b.completed === 1)">
-          {{b.requester}}
-          <p>Requested: </p>
-        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}}
+          <p>From: {{b.requester}}</p>
+          <p>Amount: ${{b.bet_amount}}</p>
+          <p>Game details: {{b.home_team_abb}} vs. {{b.away_team_abb}}</p>
           <button (click)="declineBet(b.id)">Decline</button>
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
@@ -50,7 +50,8 @@
         </div>
         <div *ngIf="(b.requester===userId && b.completed ===1)">
           <p>Pending: </p>
-          Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
+          <p>Amount: ${{b.bet_amount}}</p>
+          <p>Game details: {{b.home_team_abb}} vs. {{b.away_team_abb}}</p>
           <button (click)="declineBet(b.id)">Cancel Bet</button>
         </div>
       </ul>
@@ -60,7 +61,7 @@
     <ng-template ngbPanelContent>
       <ul *ngFor="let b of bets">
       <div *ngIf="(b.completed===2)">
-        Home User: {{b.home_user_name}} Away User: {{b.away_user_name}} Home Score: {{b.home_score}} Away Score: {{b.away_score}} Home Bet: {{b.home_bet}} Away Bet: {{b.away_bet}} Home Charity: {{b.home_charity_name}} Charity2: {{b.away_charity_name}}
+        <p>Game details: {{b.home_team_abb}} vs. {{b.away_team_abb}}</p>
       </div>
       </ul>
     </ng-template>
@@ -91,6 +92,7 @@
             <div *ngIf="b.home_user === userId"><p>Please donate to {{getCharityName(b.away_charity)}}</p></div>
             <div *ngIf="b.away_user === userId"><p>Please donate to {{getCharityName(b.home_charity)}}</p></div>
           </div>
+
           <ng-template #content let-c="close" let-d="dismiss">
             <div class="modal-header">
               <h4 class="modal-title">Place Bet</h4>
@@ -105,7 +107,7 @@
               <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
             </div>
           </ng-template>
-          <button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>
+          <!--<button class="btn btn-lg btn-outline-primary" (click)="open(content)">Email Opponent</button>-->
         </div>
       </ul>
     </ng-template>
