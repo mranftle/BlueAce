@@ -46,7 +46,7 @@ export class LoginComponent implements OnInit {
                            this.email.nativeElement.value)
       .subscribe(
         data => {
-          this.router.navigate((['/main']))
+          this.router.navigate((['/main/sportsgame']))
         },
         error => {
           console.log('Login Error');

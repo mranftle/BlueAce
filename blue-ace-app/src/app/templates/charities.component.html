@@ -1,32 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-  <!-- Bootstrap CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-</head>
-<body ng-model="main">
-<h1>Charities</h1>
 <nav class="navbar navbar-default">
   <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Navigate Pages</a>
+    <div class="navbar-header"></div>
+    <div id="menu">
+      <ul class="buttons">
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoSports()">Games</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoCharities()">Charities</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoFriends()">Friends</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="gotoProfile()">Bets</a></li>
+        <li><a class="btn btn-lg btn-secondary" (click)="logout()">Logout</a></li>
+      </ul>
     </div>
-    <ul class="buttons">
-      <li><button (click)="goHome()">Home</button></li>
-      <li><button (click)="gotoSports()">Sports Games</button></li>
-      <li><button (click)="gotoCharities()">Charities</button></li>
-      <li><button (click)="gotoFriends()">Friends</button></li>
-      <li><button (click)="gotoProfile()">Bets</button></li>
-      <li><button (click)="logout()">Logout</button></li>
-    </ul>
   </div>
 </nav>
-
-{{charities}}
+<h1 class="display-3">Charities</h1>
 <div class="container">
   <div class="row">
     <div class="col-md-6">
@@ -134,11 +120,3 @@
     </div>
   </div>
 </div>
-
-
-<!-- jQuery first, then Tether, then Bootstrap JS. -->
-<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
-</body>
-</html>
