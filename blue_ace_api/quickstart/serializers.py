@@ -21,7 +21,7 @@ class BetSerializer(serializers.HyperlinkedModelSerializer):
         model = Bet
         fields = ('id', 'home_user', 'away_user', 'bet_amount', 'game', 'home_team_abb',
                   'away_team_abb', 'home_score', 'away_score', 'started', 'home_charity', 'away_charity',
-                  'completed', 'winner')
+                  'completed', 'winner', 'requester')
 
 class CharitySerializer(serializers.HyperlinkedModelSerializer):
 

@@ -15,5 +15,10 @@ export class Bet {
   away_charity: number;
   home_user: number;
   away_user: number;
+  home_charity_name: string;
+  away_charity_name: string;
+  home_user_name: string;
+  away_user_name: string;
   game: number;
+  requester: number;
 }

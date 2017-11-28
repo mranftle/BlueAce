@@ -31,8 +31,7 @@
     <ng-template ngbPanelContent>
       <ul>
         <li *ngFor="let fr of friendRequests">
-          {{fr.from_user}}
-          {{fr.id}}
+          {{fr.username}}
           <button (click)="acceptOrDeclineFriendRequest(fr.id, 'accept')">Accept</button>
           <button (click)="acceptOrDeclineFriendRequest(fr.id, 'reject')">Decline</button>
         </li>
@@ -43,7 +42,7 @@
     <ng-template ngbPanelContent>
       <ul>
         <li *ngFor="let sfr of sentFriendRequests">
-          {{sfr.to_user}}
+          {{sfr.username}}
         </li>
       </ul>
     </ng-template>

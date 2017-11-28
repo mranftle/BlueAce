@@ -12,6 +12,7 @@ import {AuthService} from "../services/auth.service";
 
 export class FriendsComponent implements OnInit{
   allUsers: Friend[];
+  userNames: Friend[];
   friends: Friend[];
   friendRequests: FriendRequest[];
   sentFriendRequests: FriendRequest[];
@@ -68,6 +69,19 @@ export class FriendsComponent implements OnInit{
     window.location.reload();
   }
 
+  getUserNamesByIds() {
+    this.authService.getUsersByUserName().then(
+      (users) => {
+        this.userNames = users.map(function(obj) {
+          var f = new Friend();
+          f.id = obj.id;
+          f.username = obj.username;
+          f.email = obj.email;
+          return f;
+        });
+      }
+    )
+  }
 
   //get friends list
   getFriends() {
@@ -87,35 +101,79 @@ export class FriendsComponent implements OnInit{
 
   // get friend requests
   getRequests() {
-    this.friendService.getFriendRequests().then(
-      (friendRequests) => {
-        this.friendRequests = friendRequests.map(function(obj) {
+    this.authService.getUsersByUserName().then(
+      (users) => {
+        this.userNames = users.map(function(obj) {
+          var f = new Friend();
+          f.id = obj.id;
+          f.username = obj.username;
+          f.email = obj.email;
+          return f;
+        });
+        return this.userNames;
+      }
+    ).then(
+      (response) => {
+        this.friendService.getFriendRequests().then(
+          (friendRequests) => {
+            this.friendRequests = friendRequests.map(function (obj) {
               let friendRequest = new FriendRequest();
               friendRequest.id = obj.id;
-              friendRequest.from_user =obj.from_user;
+              for(var i = 0; i< response.length; ++i) {
+                console.log(response[i].id, friendRequest.id)
+                if(response[i].id === obj.id) {
+                  friendRequest.username = response[i].username;
+                }
+              }
+              friendRequest.from_user = obj.from_user;
               friendRequest.to_user = obj.to_user;
-              //friendRequest.username = response['username'];
               friendRequest.message = obj.message;
               return friendRequest
-        });
-      }
-    );
+            });
+            return this.sentFriendRequests;
+          }
+        )
+      });
   }
 
   // get sent friend requests
   getSentRequests() {
-    this.friendService.getSentFriendRequests().then(
-      (sentFriendRequests) => {
-        this.sentFriendRequests = sentFriendRequests.map(function(obj) {
-          var fr = new FriendRequest()
-          fr.id = obj.pk;
-          fr.to_user = obj.to_user;
-          fr.from_user =obj.from_user;
-          fr.message = obj.message;
-          return fr;
+    this.authService.getUsersByUserName().then(
+      (users) => {
+        this.userNames = users.map(function(obj) {
+          var f = new Friend();
+          f.id = obj.id;
+          f.username = obj.username;
+          f.email = obj.email;
+          return f;
         });
+        return this.userNames;
       }
-    );
+    ).then(
+      (response) => {
+      this.friendService.getSentFriendRequests().then(
+        (sentFriendRequests) => {
+          this.sentFriendRequests = sentFriendRequests.map(function (obj) {
+            var fr = new FriendRequest()
+            fr.id = obj.id;
+            for(var i = 0; i< response.length; ++i) {
+              console.log(response[i].id, fr.id)
+              if(response[i].id === obj.id) {
+                fr.username = response[i].username;
+              }
+            }
+            fr.to_user = obj.to_user;
+            fr.from_user = obj.from_user;
+            fr.message = obj.message;
+            return fr;
+          });
+          return this.sentFriendRequests;
+        }
+      )
+    });
+
+
+
   }
 
   // search all users by email
@@ -126,10 +184,12 @@ export class FriendsComponent implements OnInit{
     return item.id;
   }
   ngOnInit() {
-    this.getFriends();
-    this.getAllUsers();
+    this.getUserNamesByIds();
     this.getRequests();
     this.getSentRequests();
+
+    this.getFriends();
+    this.getAllUsers();
   }
 
 }

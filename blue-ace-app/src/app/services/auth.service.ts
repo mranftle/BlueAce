@@ -8,10 +8,11 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class AuthService {
+  private usernameUrl = 'http://blueace.win/users/'
   private userUrl = 'https://blueace.win/api-token-auth/';
   private signUpUrl= 'https://blueace.win/signup/';
   private idUrl = 'https://blueace.win/ids';
-
+  // private usernameUrl = 'http://localhost:8000/users/'
   // private userUrl = 'http://localhost:8000/api-token-auth/';
   // private signUpUrl= 'http://localhost:8000/signup/';
   // private idUrl = 'http://localhost:8000/ids';
@@ -67,4 +68,16 @@ export class AuthService {
       .then(response => response.json())
       .catch(error => console.error(error));
   }
+
+  getUsersByUserName() {
+    let currentUser = localStorage.getItem('currentUser');
+    let headers = new Headers({ 'Authorization': currentUser,
+                                'Content-Type': 'application/json'});
+    let options = new RequestOptions({headers:headers});
+    return this.http.get(this.usernameUrl, options)
+      .toPromise()
+      .then(response => response.json())
+      .catch(error => console.error(error));
+  }
+
 }
