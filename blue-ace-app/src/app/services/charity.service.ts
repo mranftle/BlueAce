@@ -6,8 +6,8 @@ import {Http, RequestOptions, Headers} from "@angular/http";
 
 @Injectable()
 export class CharityService {
-  private charityUrl = 'https://blueace.win/charity/';
-  // private charityUrl = 'http://localhost:8000/charity/';
+  // private charityUrl = 'https://blueace.win/charity/';
+  private charityUrl = 'http://localhost:8000/charity/';
    constructor(private http:Http) {}
 
    getCharities() {

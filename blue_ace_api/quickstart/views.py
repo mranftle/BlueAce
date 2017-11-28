@@ -89,8 +89,8 @@ class SportsGameViewSet(viewsets.ModelViewSet):
 class ExceptionLoggingMiddleware(object):
     def process_request(self, request):
         serializer = BetSerializer(data=request.body)
-        if not serializer.is_valid():
-            print serializer.errors
+        # if not serializer.is_valid():
+        #     print serializer.errors
 
 class AnotherUserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()

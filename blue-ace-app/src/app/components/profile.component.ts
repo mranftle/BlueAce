@@ -77,9 +77,7 @@ export class ProfileComponent implements OnInit {
   }
 
   getBets() {
-    this.authService.
-    
-    IdFromJwt().then( (res) => {
+    this.authService.getUserIdFromJwt().then( (res) => {
       this.userId = res.id;
       return this.userId;
     }).then( (id) => {

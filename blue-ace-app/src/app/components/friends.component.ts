@@ -121,7 +121,7 @@ export class FriendsComponent implements OnInit{
               friendRequest.id = obj.id;
               for(var i = 0; i< response.length; ++i) {
                 console.log(response[i].id, friendRequest.id)
-                if(response[i].id === obj.id) {
+                if(response[i].id === obj.from_user) {
                   friendRequest.username = response[i].username;
                 }
               }
