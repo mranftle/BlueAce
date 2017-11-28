@@ -170,10 +170,6 @@ export class SportsGamesComponent implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
-  acceptBet(bet_id:number) {
-    this.betService.acceptBet(bet_id);
-  }
-
   open(content, game: SportsGame) {
     this.selectedGame = game;
 

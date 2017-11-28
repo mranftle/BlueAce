@@ -1,3 +1,4 @@
+import json
 from rest_framework import viewsets, status
 from django.contrib.auth.models import User
 from rest_framework.decorators import permission_classes, detail_route
@@ -36,12 +37,29 @@ class BetViewSet(viewsets.ModelViewSet):
 
     @detail_route(methods=['post'])
     def accept_bet(self, request, pk=None):
-        bet = Bet.objects.filter(id=pk).update(completed=1)
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        charity = body['charity']
+        Bet.objects.filter(id=pk).update(completed=1)
+        bet = Bet.objects.get(id=pk)
+        if bet.home_charity is None:
+            Bet.objects.filter(id=pk).update(home_charity=charity)
+        else:
+            Bet.objects.filter(id=pk).update(away_charity=charity)
         return Response({
             'status': 'Bet accepted',
             'message': 'Bet accepted'
         }, status=status.HTTP_200_OK)
 
+    @detail_route(methods=['post'])
+    def decline_bet(self, request, pk=None):
+        bet = Bet.objects.filter(id=pk).delete()
+
+        return Response({
+            'status': 'Bet declined',
+            'message': 'Bet declined'
+        }, status=status.HTTP_200_OK)
+    
     # list all bets for this user
     def list(self, request):
         home_bets = Bet.objects.filter(home_user=request.user.id)

@@ -5,9 +5,9 @@ class SportsGame(models.Model):
     id = models.AutoField(primary_key=True)
     home_team = models.CharField(max_length=30)
     away_team = models.CharField(max_length=30)
-    starts = models.DateTimeField()
-    home_team_abb = models.CharField(max_length=20)
-    away_team_abb = models.CharField(max_length=20)
+    starts = models.DateTimeField(default='')
+    home_team_abb = models.CharField(max_length=20, default='')
+    away_team_abb = models.CharField(max_length=20, default='')
     stadium = models.CharField(max_length=30)
 
 class Bet(models.Model):
