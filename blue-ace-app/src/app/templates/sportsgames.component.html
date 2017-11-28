@@ -35,17 +35,24 @@
   </div>
   <div class="modal-body">
     <div class="form-group">
-      <label for="amount">Username</label>
+      <p>Team to bet on:</p>
+      <select name="team" id="team-selection" #q (change)="changeSelectedTeam(q.value)">
+        <option value="home">{{selectedGame.homeTeam}}</option>
+        <option value="away">{{selectedGame.awayTeam}}</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <p for="amount">Bet amount</p>
       <div class="input-group">
         <div class="input-group-addon">$</div>
-        <input type="number" class="form-control" id="amount" placeholder="Bet Amount">
+        <input type="number" class="form-control" #amount placeholder="Bet Amount" (change)="changeBetAmount(amount.value)">
       </div>
     </div>
     <div class="form-group">
       <p>Against:</p>
       <select class="form-control" id="friends" #r (change)="changeSelectedFriend(r.value)">
         <option *ngFor="let friend of friends" [value]="friend">
-          {{friend}}
+          {{friend.username}}
         </option>
       </select>
     </div>
@@ -53,13 +60,13 @@
       <p>Charity</p>
       <select class="form-control" id="charities" #t (change)="changeSelectedCharity(t.value)">
         <option *ngFor="let charity of charities" [value]="charity">
-          {{charity}}
+          {{charity.name}}
         </option>
       </select>
     </div>
   </div>
   <div class="modal-footer">
-    <button type="button" class="btn btn-primary" (click)="requestBet()">Request Bet</button>
+    <button type="button" class="btn btn-primary" (click)="requestBet()" data-dismiss="#content">Request Bet</button>
     <button type="button" class="btn btn-danger" (click)="c('Close click')">Close</button>
   </div>
 </ng-template>

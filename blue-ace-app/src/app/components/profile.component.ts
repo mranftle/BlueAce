@@ -47,8 +47,7 @@ export class ProfileComponent implements OnInit {
           b.home_score = obj.home_score;
           b.away_score = obj.away_score;
           b.completed = obj.completed;
-          b.home_bet = obj.home_bet;
-          b.away_bet = obj.away_bet;
+          b.bet_amount = obj.bet_amount;
           b.winner = obj.winner;
           b.started = obj.started;
           b.home_charity = obj.home_charity;
@@ -60,7 +59,7 @@ export class ProfileComponent implements OnInit {
     console.log(this.bets[0]);
   }
   logout(){
-    this.authService.logout()
+    this.authService.logout();
     this.router.navigateByUrl('/login');
   }
   ngOnInit() {

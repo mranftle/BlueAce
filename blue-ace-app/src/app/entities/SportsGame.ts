@@ -3,11 +3,11 @@
  */
 
 export class SportsGame {
-  gameId: Number;
-  homeTeam: String;
-  awayTeam: String;
+  gameId: number;
+  homeTeam: string;
+  awayTeam: string;
   starts: Date;
-  homeTeamAbbreviation: String;
-  awayTeamAbbreviation: String;
-  stadium: String;
+  homeTeamAbbreviation: string;
+  awayTeamAbbreviation: string;
+  stadium: string;
 }

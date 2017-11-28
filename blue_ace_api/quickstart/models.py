@@ -12,19 +12,18 @@ class SportsGame(models.Model):
 
 class Bet(models.Model):
     id = models.AutoField(primary_key=True)
-    home_user=models.IntegerField()
-    away_user=models.IntegerField()
-    home_bet = models.IntegerField()
-    away_bet = models.IntegerField()
+    home_user=models.IntegerField(null=True)
+    away_user=models.IntegerField(null=True)
+    bet_amount = models.IntegerField()
     game = models.IntegerField()
     home_team_abb = models.CharField(max_length=20)
     away_team_abb = models.CharField(max_length=20)
     home_score = models.IntegerField(null=True)
     away_score = models.IntegerField(null=True)
     started = models.IntegerField()
-    home_charity = models.IntegerField()
-    away_charity = models.IntegerField()
-    completed = models.BooleanField(default=False)
+    home_charity = models.IntegerField(null=True)
+    away_charity = models.IntegerField(null=True)
+    completed = models.IntegerField()
     winner = models.IntegerField(null=True)
 
 class Charity(models.Model):

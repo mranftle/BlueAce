@@ -6,12 +6,10 @@ import {Http, Headers, RequestOptions, Response} from "@angular/http";
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-
-
 @Injectable()
 export class AuthService {
   private userUrl = 'http://localhost:8000/api-token-auth/';
-  private signUpUrl= 'http://localhost:8000/signup/'
+  private signUpUrl= 'http://localhost:8000/signup/';
   constructor(private http: Http) {}
 
   login(username: string, password: string, email: string) {
@@ -24,7 +22,6 @@ export class AuthService {
         let user = response.json();
         if (user && user.token) {
           // store user details and jwt token in local storage to keep user logged in between page refreshes
-          console.log(user);
           localStorage.setItem('currentUser', 'JWT '.concat(user.token));
         }
       });

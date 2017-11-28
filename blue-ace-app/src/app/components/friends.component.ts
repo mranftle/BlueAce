@@ -90,22 +90,17 @@ export class FriendsComponent implements OnInit{
     this.friendService.getFriendRequests().then(
       (friendRequests) => {
         this.friendRequests = friendRequests.map(function(obj) {
-          this.friendService.getUserName(obj.from_user).then(
-            (response) => {
-              var fr = new FriendRequest();
-              fr.id = obj.id;
-              fr.from_user =obj.from_user;
-              fr.to_user = obj.to_user;
-              fr.username = response['username'];
-              fr.message = obj.message;
-              return fr
-            }
-          )
+              let friendRequest = new FriendRequest();
+              friendRequest.id = obj.id;
+              friendRequest.from_user =obj.from_user;
+              friendRequest.to_user = obj.to_user;
+              //friendRequest.username = response['username'];
+              friendRequest.message = obj.message;
+              return friendRequest
         });
       }
     );
   }
-
 
   // get sent friend requests
   getSentRequests() {
