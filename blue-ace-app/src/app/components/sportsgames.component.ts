@@ -153,6 +153,7 @@ export class SportsGamesComponent implements OnInit {
           alert('Bet amount must be greater than 0!');
         }
         bet.game = this.selectedGame.gameId;
+        bet.requester = userId;
         bet.winner = null;
         bet.home_score = 0;
         bet.away_score = 0;

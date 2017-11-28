@@ -11,9 +11,8 @@ import {SportsGame} from "../entities/SportsGame";
 
 @Injectable()
 export class GameService {
-  private url = 'https://blueace.win/games';
-
-  // private url = 'http://localhost:8000/games';
+  // private url = 'https://blueace.win/games';
+  private url = 'http://localhost:8000/games';
 
   constructor(private http: Http) {
     //

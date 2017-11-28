@@ -10,6 +10,10 @@ from serializers import UserSerializer, CharitySerializer, SportsGameSerializer,
 from rest_framework.response import Response
 from rest_framework.authtoken.models import Token
 
+class UserViewSet2(viewsets.ModelViewSet):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
 @permission_classes([AllowAny, ])
 class UserViewSet(viewsets.ModelViewSet):
     queryset = User.objects.all()
