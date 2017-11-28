@@ -2,16 +2,18 @@ from time import time
 import base64
 import requests
 from config import credentials
+import json
+
 
 def send_mysportsfeed_request(url):
     try:
-        response = requests.get(url=url, params={"fordate": "20161121"}, headers={"Authorization": "Basic " + base64.b64encode(
-            '{}:{}'.format({credentials.get('username')}, {credentials.get('password')}).encode('utf-8')).decode('ascii')})
+        response = requests.get(url=url, headers={
+            "Authorization": "Basic " + base64.b64encode("{}:{}".format(credentials['username'], credentials['password']))})
         if response.status_code != 200:
             print 'Response status code invalid! Got a {} status code'.format(response.status_code)
             return None
         else:
-            return response
+            return response.content
     except requests.exceptions.RequestException:
         print 'HTTP Request failed'
         return None
@@ -19,26 +21,25 @@ def send_mysportsfeed_request(url):
 
 def validate_win():
     from quickstart.views import BetViewSet, SportsGameViewSet
-    bets = list(BetViewSet().get_queryset())
+    bets = filter(lambda x: x.started + 18000 < time(), list(BetViewSet().get_queryset()))
     all_games = list(SportsGameViewSet().get_queryset())
-    games = []
-    for bet in bets:
-        
-
-    for bet in bets:
+    games = [filter(lambda x: x.id == bet.game, all_games)[0] for bet in bets]
+    for index, bet in enumerate(bets):
+        game = games[index]
+        game_date = game.starts.strftime('%Y%m%d')
         # Construct url
-        box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(bet.game,
-            bet.away_team_abb, bet.home_team_abb)
+        box_score_url = 'https://api.mysportsfeeds.com/v1.1/pull/nfl/2017-regular/game_boxscore.json?gameid={}-{}-{}'.format(game_date,
+                                                                                                                             bet.away_team_abb,
+                                                                                                                             bet.home_team_abb)
 
         # Make request
-        response = send_mysportsfeed_request(box_score_url)
+        response = json.loads(send_mysportsfeed_request(box_score_url))
+        scores = response.get('gameboxscore').get('quarterSummary').get('quarterTotals')
 
-        print response
+        # Parse scores
+        home_score = scores.get('homeScore')
+        away_score = scores.get('awayScore')
 
-        # # Parse scores
-        # home_score = response.get('quarterTotals').get('homeScore')
-        # away_score = response.get('quarterTotals').get('awayScore')
-        #
         # # Get winner and winning charity
         # winner, winning_charity = (bet.home_user, bet.home_charity) if home_score > away_score else (bet.away_user, bet.away_charity)
         #

@@ -44,15 +44,7 @@ export class SportsGamesComponent implements OnInit {
     console.log(this.getNiceTime(new Date()));
     this.getGames();
     this.getFriends();
-
-    //this.getCharities();
-    let c = new Charity();
-    c.id = 1;
-    c.name = 'Boys and Girls Club';
-    this.charities = [];
-    this.charities.push(c);
-
-    this.selectedTeam = 'home';
+    this.getCharities();
   }
 
   constructor(private router: Router,
@@ -62,11 +54,6 @@ export class SportsGamesComponent implements OnInit {
               private gameService: GameService,
               private friendService: FriendService,
               private charityService: CharityService){
-  }
-
-  removePastGames() {
-    let result = this.sportsGames.filter(game => game.starts.getTime() > Date.now());
-    this.sportsGames = result;
   }
 
   //get friends list
@@ -87,9 +74,15 @@ export class SportsGamesComponent implements OnInit {
   getCharities() {
     this.charityService.getCharities().then(
       (charities) => {
-        this.charities = charities;
+        this.charities = charities.map(function(obj) {
+          let charity = new Charity();
+          charity.name = obj.name;
+          charity.id = obj.id;
+          charity.description = obj.description;
+          charity.total_donated = obj.total_donated;
+          charity.url = obj.url;
+        });
       }
-
     )
   }
 
@@ -99,6 +92,7 @@ export class SportsGamesComponent implements OnInit {
   }
 
   changeSelectedFriend(friend: Friend) {
+    console.log(friend);
     this.selectedFriend = friend;
   }
 
